@@ -1,0 +1,261 @@
+{
+  "common": {
+    "title": "Stellara",
+    "tagline": "Your personal AI astrologer",
+    "disclaimer": "For entertainment purposes only. Stellara does not claim psychic or supernatural abilities. Not a substitute for professional advice.",
+    "termsLink": "Terms of Service",
+    "privacyLink": "Privacy Policy",
+    "error": {
+      "serverConnection": "Failed to connect to server"
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "personal": "Personal",
+    "reading": "Reading",
+    "tarot": "Tarot",
+    "chat": "Chat",
+    "settings": "Settings",
+    "home": "Home",
+    "history": "History"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "signUpLink": "Sign Up",
+      "error": "Login failed",
+      "demoSeparator": "or",
+      "demoButton": "Try with demo account",
+      "demoDisclaimer": "* Data is not saved in demo mode"
+    },
+    "signup": {
+      "title": "Create Your Account",
+      "email": "Email",
+      "password": "Password (8+ characters)",
+      "birthDate": "Birth Date",
+      "displayName": "Display Name (optional)",
+      "termsConsent": "I agree to the {termsLink} and {privacyLink}",
+      "entertainmentConsent": "I understand that Stellara is for entertainment purposes only and does not provide professional advice",
+      "submit": "Sign Up",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Log In",
+      "error": "Signup failed"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter your email address and we'll send you a link to reset your password.",
+      "email": "Email",
+      "submit": "Send Reset Link",
+      "backToLogin": "Back to Log In"
+    },
+    "logout": "Log out"
+  },
+  "dashboard": {
+    "greeting": {
+      "morning": "Good morning,",
+      "afternoon": "Good afternoon,",
+      "evening": "Good evening,"
+    },
+    "subtitle": "Here's what the stars have in store for you today.",
+    "explore": "Explore",
+    "actions": {
+      "personalReading": {
+        "title": "Personal Reading",
+        "description": "Get a personalized star reading"
+      },
+      "tarot": {
+        "title": "Tarot",
+        "description": "Draw cards and reveal your path"
+      },
+      "chat": {
+        "title": "Chat",
+        "description": "Ask the stars anything"
+      }
+    }
+  },
+  "horoscope": {
+    "loading": "Consulting the stars...",
+    "todaysHoroscope": "Today's Horoscope",
+    "loadError": "Failed to load horoscope"
+  },
+  "reading": {
+    "title": "Personal Reading",
+    "subtitle": "Share your question and the stars will reveal their guidance.",
+    "placeholder": "What would you like guidance on? (optional)",
+    "submit": "Get Reading",
+    "revealReading": "Reveal My Reading",
+    "loading": "The stars are aligning...",
+    "anotherReading": "Get another reading",
+    "readingBadge": "{type} Reading",
+    "contentFiltered": "Content filtered",
+    "guidanceNote": "The stars offer guidance, not certainty. Trust your own intuition.",
+    "error": "Reading failed"
+  },
+  "tarot": {
+    "title": "Tarot Reading",
+    "subtitle": "Choose your spread, focus your intention, and draw your cards.",
+    "singleCard": "Single Card",
+    "pastPresentFuture": "Past / Present / Future",
+    "placeholder": "What guidance are you seeking? (optional)",
+    "drawCards": "Draw Cards",
+    "loading": "Interpreting the cards...",
+    "drawAgain": "Draw again",
+    "positions": {
+      "past": "Past",
+      "present": "Present",
+      "future": "Future",
+      "single": "Your Card"
+    },
+    "orientation": {
+      "upright": "Upright",
+      "reversed": "Reversed"
+    }
+  },
+  "chat": {
+    "title": "Star Chat",
+    "subtitle": "Ask the stars for guidance",
+    "emptyState": "Begin your conversation with the stars.\nAsk about love, career, or life guidance.",
+    "loading": "The stars are thinking...",
+    "inputPlaceholder": "Ask the stars...",
+    "turnCounter": "{current}/{limit} turns used",
+    "limitReached": "You've reached the turn limit for this session.",
+    "upgradePrompt": "Upgrade to Pro for more conversations.",
+    "error": "Chat failed"
+  },
+  "history": {
+    "title": "Reading History",
+    "subtitle": "Your past star readings and tarot sessions.",
+    "empty": "No readings yet. Start with a personal reading or tarot session.",
+    "loadMore": "Load more",
+    "loading": "Loading your history...",
+    "error": "Failed to load reading history",
+    "upgradePrompt": "Upgrade to Pro to access your reading history.",
+    "upgrade": "Upgrade to Pro",
+    "types": {
+      "personal": "Personal Reading",
+      "tarot": "Tarot",
+      "chat": "Star Chat",
+      "compatibility": "Compatibility"
+    }
+  },
+  "landing": {
+    "hero": {
+      "headline": "Your Personal AI Astrologer",
+      "subheadline": "Daily horoscopes, tarot readings, and cosmic guidance — personalized to your birth chart.",
+      "cta": "Start Free",
+      "login": "Log in"
+    },
+    "features": {
+      "title": "Everything the cosmos has to offer",
+      "items": {
+        "horoscope": {
+          "title": "Daily Horoscope",
+          "description": "Start every day with a personalized reading based on your sun sign and current planetary alignments."
+        },
+        "reading": {
+          "title": "Personal Reading",
+          "description": "Ask about love, career, or life. The stars will reveal what you need to hear — not what you want."
+        },
+        "tarot": {
+          "title": "Tarot",
+          "description": "Draw cards for a single insight or a full past-present-future spread. The cards always know."
+        },
+        "chat": {
+          "title": "Star Chat",
+          "description": "Have a real conversation with your AI astrologer. Ask follow-ups, dig deeper, find clarity."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "steps": {
+        "one": {
+          "title": "Create your free account",
+          "description": "Enter your birth date. That's all the stars need to know you."
+        },
+        "two": {
+          "title": "Choose your reading",
+          "description": "Daily horoscope, personal reading, tarot, or open-ended chat with your AI astrologer."
+        },
+        "three": {
+          "title": "Receive your guidance",
+          "description": "Deep, personalized insights in seconds. No waiting rooms. No vague predictions."
+        }
+      }
+    },
+    "pricing": {
+      "title": "Simple, honest pricing",
+      "subtitle": "Start for free. Upgrade when the stars align.",
+      "free": {
+        "name": "Free",
+        "price": "$0",
+        "period": "forever",
+        "features": [
+          "Daily horoscope",
+          "1 personal reading per day",
+          "1 tarot draw per day"
+        ],
+        "cta": "Get started free"
+      },
+      "pro": {
+        "name": "Pro",
+        "price": "$9.99",
+        "period": "per month",
+        "badge": "Most popular",
+        "features": [
+          "Unlimited personal readings",
+          "Unlimited tarot sessions",
+          "20 chat turns per month",
+          "Reading history",
+          "Priority insights"
+        ],
+        "cta": "Upgrade to Pro"
+      }
+    },
+    "socialProof": {
+      "disclaimer": "For entertainment purposes only. Not a substitute for professional advice."
+    },
+    "finalCta": {
+      "title": "The stars are ready for you",
+      "subtitle": "Join thousands of seekers discovering their cosmic path.",
+      "cta": "Start free — no credit card needed"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account preferences.",
+    "subscription": {
+      "title": "Subscription",
+      "currentPlan": "Current Plan",
+      "free": "Free",
+      "pro": "Pro — $9.99/month",
+      "upgrade": "Upgrade to Pro",
+      "upgradeDescription": "Unlock unlimited readings, priority chat, and more with Stellara Pro.",
+      "manage": "Manage Subscription",
+      "nextBilling": "Next billing: {date}",
+      "loading": "Loading...",
+      "euConsent": {
+        "title": "EU/EEA Consumer Notice",
+        "immediateDelivery": "I request immediate access to the digital content and consent to delivery before the expiry of the 14-day withdrawal period.",
+        "waiverAcknowledged": "I understand that by requesting immediate delivery, I lose my right to withdraw from this contract within 14 days (right of withdrawal under EU Consumer Rights Directive Art. 16(m)).",
+        "required": "Both consents are required to proceed with purchase."
+      }
+    },
+    "dangerZone": "Danger Zone",
+    "deleteDescription": "Permanently delete your account and all associated data. This action has a 30-day grace period.",
+    "deleteButton": "Delete Account",
+    "deleteDialog": {
+      "title": "Delete Account",
+      "description": "This will schedule your account for permanent deletion in 30 days. Your data will be permanently removed after that period. This action cannot be undone.",
+      "confirmLabel": "Type \"DELETE\" to confirm",
+      "confirmPlaceholder": "DELETE",
+      "cancel": "Cancel",
+      "confirm": "Delete My Account"
+    }
+  }
+}

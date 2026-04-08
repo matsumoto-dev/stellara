@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  /* Stellara Color Palette — BRAND.md */
+  --color-primary: #2D1B69;
+  --color-secondary: #1A1A4E;
+  --color-accent: #D4AF37;
+  --color-accent-light: #E8C94A;
+  --color-bg: #0D0D1A;
+  --color-bg-card: #161630;
+  --color-text: #E8E8F0;
+  --color-text-muted: #9090B0;
+
+  /* Fonts */
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
