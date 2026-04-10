@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { DailyCard } from "@/components/horoscope/daily-card";
+import { ProfileSetup } from "@/components/profile/profile-setup";
 import { Card, CardTitle } from "@/components/ui/card";
 import type { SunSign } from "@/lib/db/types";
 
@@ -20,6 +21,7 @@ export default function DashboardPage() {
   const [horoscope, setHoroscope] = useState<HoroscopeData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [needsSetup, setNeedsSetup] = useState(false);
 
   const quickActions = [
     {
@@ -48,7 +50,11 @@ export default function DashboardPage() {
         const res = await fetch("/api/horoscope");
         const json = await res.json();
         if (!json.success) {
-          setError(json.error ?? "Failed to load horoscope");
+          if (json.code === "PROFILE_NOT_FOUND") {
+            setNeedsSetup(true);
+          } else {
+            setError(json.error ?? tCommon("error.serverConnection"));
+          }
           return;
         }
         setHoroscope(json.data);
@@ -61,6 +67,11 @@ export default function DashboardPage() {
     fetchHoroscope();
   }, [tCommon]);
 
+  function handleSetupComplete(data: HoroscopeData) {
+    setNeedsSetup(false);
+    setHoroscope(data);
+  }
+
   return (
     <div className="max-w-2xl mx-auto space-y-8">
       <div>
@@ -70,13 +81,17 @@ export default function DashboardPage() {
         <p className="text-text-muted">{t("subtitle")}</p>
       </div>
 
-      <DailyCard
-        sign={horoscope?.sign ?? null}
-        date={horoscope?.date ?? null}
-        content={horoscope?.content ?? null}
-        loading={loading}
-        error={error}
-      />
+      {needsSetup ? (
+        <ProfileSetup onComplete={handleSetupComplete} />
+      ) : (
+        <DailyCard
+          sign={horoscope?.sign ?? null}
+          date={horoscope?.date ?? null}
+          content={horoscope?.content ?? null}
+          loading={loading}
+          error={error}
+        />
+      )}
 
       <div>
         <h2 className="font-heading text-lg font-semibold text-text mb-4">{t("explore")}</h2>

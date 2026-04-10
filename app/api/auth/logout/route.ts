@@ -7,11 +7,13 @@ export async function POST() {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-      return NextResponse.json({ success: false, error: "Logout failed" }, { status: 500 });
+      console.error("[auth/logout] signOut error:", error);
+      return NextResponse.json({ success: false, error: "ログアウトに失敗しました" }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+  } catch (error) {
+    console.error("[auth/logout] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

@@ -244,7 +244,9 @@
         "immediateDelivery": "I request immediate access to the digital content and consent to delivery before the expiry of the 14-day withdrawal period.",
         "waiverAcknowledged": "I understand that by requesting immediate delivery, I lose my right to withdraw from this contract within 14 days (right of withdrawal under EU Consumer Rights Directive Art. 16(m)).",
         "required": "Both consents are required to proceed with purchase."
-      }
+      },
+      "demoMode": "Billing is not available in demo mode.",
+      "demoModeButton": "Coming Soon"
     },
     "dangerZone": "Danger Zone",
     "deleteDescription": "Permanently delete your account and all associated data. This action has a 30-day grace period.",
@@ -257,5 +259,31 @@
       "cancel": "Cancel",
       "confirm": "Delete My Account"
     }
+  },
+  "profileSetup": {
+    "title": "Choose your zodiac sign",
+    "subtitle": "Tell us your sign so we can deliver your personalized horoscope.",
+    "submit": "Get Started",
+    "saving": "Saving...",
+    "error": "Failed to save your sign"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "defaultMessage": "An unexpected error occurred. Please try again.",
+    "tryAgain": "Try again"
+  },
+  "zodiac": {
+    "aries": "Aries",
+    "taurus": "Taurus",
+    "gemini": "Gemini",
+    "cancer": "Cancer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Scorpio",
+    "sagittarius": "Sagittarius",
+    "capricorn": "Capricorn",
+    "aquarius": "Aquarius",
+    "pisces": "Pisces"
   }
 }

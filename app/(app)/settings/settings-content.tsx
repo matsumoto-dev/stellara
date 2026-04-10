@@ -14,6 +14,7 @@ interface SettingsContentProps {
   readonly subscriptionStatus: SubscriptionStatus;
   readonly periodEnd: string | null;
   readonly monthlyPriceId: string;
+  readonly stripeConfigured: boolean;
   readonly isEU: boolean;
   readonly countryCode: string | null;
 }
@@ -23,6 +24,7 @@ export function SettingsContent({
   subscriptionStatus,
   periodEnd,
   monthlyPriceId,
+  stripeConfigured,
   isEU,
   countryCode,
 }: SettingsContentProps) {
@@ -38,7 +40,7 @@ export function SettingsContent({
       const res = await fetch("/api/account/delete", { method: "POST" });
       const json = await res.json();
       if (!json.success) {
-        setDeleteError(json.error ?? "Failed to delete account");
+        setDeleteError(json.error ?? "アカウントの削除に失敗しました");
         return;
       }
       router.push("/login");
@@ -59,6 +61,7 @@ export function SettingsContent({
         subscriptionStatus={subscriptionStatus}
         periodEnd={periodEnd}
         monthlyPriceId={monthlyPriceId}
+        stripeConfigured={stripeConfigured}
         isEU={isEU}
         countryCode={countryCode}
       />

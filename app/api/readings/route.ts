@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: "Pro subscription required to view reading history",
+          error: "履歴の閲覧にはProプランが必要です",
           upgradeRequired: true,
         },
         { status: 402 },
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 
     if (!parsed.success) {
       return NextResponse.json(
-        { success: false, error: "Invalid query parameters" },
+        { success: false, error: "リクエストが不正です" },
         { status: 400 },
       );
     }
@@ -60,7 +60,8 @@ export async function GET(request: NextRequest) {
       .range(offset, offset + limit - 1);
 
     if (error) {
-      return NextResponse.json({ success: false, error: "Failed to fetch readings" }, { status: 500 });
+      console.error("[readings] failed to fetch:", error);
+      return NextResponse.json({ success: false, error: "履歴の取得に失敗しました" }, { status: 500 });
     }
 
     return NextResponse.json({
@@ -79,6 +80,7 @@ export async function GET(request: NextRequest) {
         { status: error.statusCode },
       );
     }
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    console.error("[readings] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

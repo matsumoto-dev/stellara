@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     if (!parsed.success) {
       return NextResponse.json(
-        { success: false, error: "Invalid input", details: parsed.error.flatten() },
+        { success: false, error: "入力内容に誤りがあります", details: parsed.error.flatten() },
         { status: 400 },
       );
     }
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     try {
       sunSign = getSunSign(birth_date);
     } catch {
-      return NextResponse.json({ success: false, error: "Invalid birth date" }, { status: 400 });
+      return NextResponse.json({ success: false, error: "生年月日が正しくありません" }, { status: 400 });
     }
 
     const supabase = await createClient();
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
 
     if (profileError) {
       return NextResponse.json(
-        { success: false, error: "Failed to create profile" },
+        { success: false, error: "プロフィールの作成に失敗しました" },
         { status: 500 },
       );
     }
@@ -93,7 +93,8 @@ export async function POST(request: NextRequest) {
       success: true,
       data: { userId, sunSign },
     });
-  } catch {
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+  } catch (error) {
+    console.error("[auth/signup] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

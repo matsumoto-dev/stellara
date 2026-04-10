@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
     if (!parsed.success) {
       return NextResponse.json(
-        { success: false, error: "Invalid request", details: parsed.error.flatten() },
+        { success: false, error: "リクエストが不正です", details: parsed.error.flatten() },
         { status: 400 },
       );
     }
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: "Pro subscription required",
+          error: "この機能にはProプランが必要です",
           reason: access.reason,
           upgradeRequired: true,
         },
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: "Usage limit reached",
+          error: "利用回数の上限に達しました",
           remaining: rateResult.remaining,
           resetAt: rateResult.resetAt,
           limit: rateResult.limit,
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
         const vars = personalReadingVarsSchema.safeParse(enrichedVars);
         if (!vars.success) {
           return NextResponse.json(
-            { success: false, error: "Invalid variables for personal reading" },
+            { success: false, error: "リクエストが不正です" },
             { status: 400 },
           );
         }
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
         const vars = tarotVarsSchema.safeParse(variables);
         if (!vars.success) {
           return NextResponse.json(
-            { success: false, error: "Invalid variables for tarot reading" },
+            { success: false, error: "リクエストが不正です" },
             { status: 400 },
           );
         }
@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
         const vars = chatVarsSchema.safeParse(enrichedVars);
         if (!vars.success) {
           return NextResponse.json(
-            { success: false, error: "Invalid variables for chat" },
+            { success: false, error: "リクエストが不正です" },
             { status: 400 },
           );
         }
@@ -144,13 +144,13 @@ export async function POST(request: NextRequest) {
       case "compatibility": {
         // Pro-only: blocked by feature gate above; this branch is unreachable for free users.
         return NextResponse.json(
-          { success: false, error: "Compatibility readings coming soon" },
+          { success: false, error: "相性鑑定は準備中です" },
           { status: 501 },
         );
       }
       default:
         return NextResponse.json(
-          { success: false, error: "Unknown reading type" },
+          { success: false, error: "不明な鑑定タイプです" },
           { status: 400 },
         );
     }
@@ -182,6 +182,6 @@ export async function POST(request: NextRequest) {
       );
     }
     console.error("[reading] unhandled error:", error);
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

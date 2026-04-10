@@ -23,6 +23,7 @@ export default async function SettingsPage() {
   const subscriptionStatus = (profile?.subscription_status as SubscriptionStatus) ?? "none";
   const periodEnd = (profile?.subscription_period_end as string) ?? null;
   const monthlyPriceId = process.env.STRIPE_PRICE_PRO_MONTHLY ?? "";
+  const stripeConfigured = monthlyPriceId.startsWith("price_");
 
   // Detect EU/EEA visitors via Vercel's geo header (x-vercel-ip-country)
   const headersList = await headers();
@@ -35,6 +36,7 @@ export default async function SettingsPage() {
       subscriptionStatus={subscriptionStatus}
       periodEnd={periodEnd}
       monthlyPriceId={monthlyPriceId}
+      stripeConfigured={stripeConfigured}
       isEU={isEU}
       countryCode={countryCode}
     />

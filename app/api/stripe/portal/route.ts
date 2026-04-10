@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
     if (!profile?.stripe_customer_id) {
       return NextResponse.json(
-        { success: false, error: "No active subscription" },
+        { success: false, error: "有効なプランがありません" },
         { status: 400 },
       );
     }
@@ -32,6 +32,7 @@ export async function POST(request: Request) {
         { status: error.statusCode },
       );
     }
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    console.error("[stripe/portal] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

@@ -31,7 +31,10 @@ export async function GET() {
       .single();
 
     if (profileError || !profile) {
-      return NextResponse.json({ success: false, error: "Profile not found" }, { status: 404 });
+      return NextResponse.json(
+        { success: false, error: "プロフィールが見つかりませんでした", code: "PROFILE_NOT_FOUND" },
+        { status: 404 },
+      );
     }
 
     const sign = profile.sun_sign as SunSign;
@@ -88,6 +91,7 @@ export async function GET() {
         { status: error.statusCode },
       );
     }
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    console.error("[horoscope/weekly] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

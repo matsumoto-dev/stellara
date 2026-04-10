@@ -13,7 +13,7 @@ export async function POST() {
 
   if (!demoEmail || !demoPassword) {
     return NextResponse.json(
-      { success: false, error: "Not found" },
+      { success: false, error: "デモアカウントが見つかりませんでした" },
       { status: 404 },
     );
   }
@@ -28,7 +28,7 @@ export async function POST() {
 
     if (error) {
       return NextResponse.json(
-        { success: false, error: "Demo login failed" },
+        { success: false, error: "デモログインに失敗しました" },
         { status: 401 },
       );
     }
@@ -37,9 +37,10 @@ export async function POST() {
       success: true,
       data: { userId: data.user.id },
     });
-  } catch {
+  } catch (error) {
+    console.error("[auth/demo-login] unhandled error:", error);
     return NextResponse.json(
-      { success: false, error: "Internal server error" },
+      { success: false, error: "サーバーエラーが発生しました" },
       { status: 500 },
     );
   }

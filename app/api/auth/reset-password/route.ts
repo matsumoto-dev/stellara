@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     const parsed = resetSchema.safeParse(body);
 
     if (!parsed.success) {
-      return NextResponse.json({ success: false, error: "Invalid email" }, { status: 400 });
+      return NextResponse.json({ success: false, error: "メールアドレスが正しくありません" }, { status: 400 });
     }
 
     const supabase = await createClient();
@@ -24,7 +24,8 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+  } catch (error) {
+    console.error("[auth/reset-password] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

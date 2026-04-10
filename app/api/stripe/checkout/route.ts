@@ -26,13 +26,13 @@ export async function POST(request: Request) {
     const parsed = checkoutRequestSchema.safeParse(body);
 
     if (!parsed.success) {
-      return NextResponse.json({ success: false, error: "Invalid request" }, { status: 400 });
+      return NextResponse.json({ success: false, error: "リクエストが不正です" }, { status: 400 });
     }
 
     // Validate price ID against known prices
     const validPrices = VALID_PRICE_IDS();
     if (!validPrices.includes(parsed.data.priceId)) {
-      return NextResponse.json({ success: false, error: "Invalid price ID" }, { status: 400 });
+      return NextResponse.json({ success: false, error: "不正なプランIDです" }, { status: 400 });
     }
 
     // Record EU Art.16(m) consent before creating checkout session

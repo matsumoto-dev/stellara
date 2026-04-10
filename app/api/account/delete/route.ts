@@ -23,6 +23,7 @@ export async function POST() {
         { status: error.statusCode },
       );
     }
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    console.error("[account/delete] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

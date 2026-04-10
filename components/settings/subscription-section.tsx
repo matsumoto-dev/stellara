@@ -12,6 +12,7 @@ interface SubscriptionSectionProps {
   readonly subscriptionStatus: SubscriptionStatus;
   readonly periodEnd: string | null;
   readonly monthlyPriceId: string;
+  readonly stripeConfigured: boolean;
   readonly isEU: boolean;
   readonly countryCode: string | null;
 }
@@ -21,6 +22,7 @@ export function SubscriptionSection({
   subscriptionStatus,
   periodEnd,
   monthlyPriceId,
+  stripeConfigured,
   isEU,
   countryCode,
 }: SubscriptionSectionProps) {
@@ -117,7 +119,7 @@ export function SubscriptionSection({
           <Button onClick={handleManage} disabled={loading}>
             {loading ? t("loading") : t("manage")}
           </Button>
-        ) : (
+        ) : stripeConfigured ? (
           <div className="space-y-4">
             <p className="text-sm text-text-muted">{t("upgradeDescription")}</p>
 
@@ -152,6 +154,12 @@ export function SubscriptionSection({
             <Button onClick={handleUpgrade} disabled={loading || !euConsentComplete}>
               {loading ? t("loading") : t("upgrade")}
             </Button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <p className="text-sm text-text-muted">{t("upgradeDescription")}</p>
+            <p className="text-sm text-text-muted">{t("demoMode")}</p>
+            <Button disabled>{t("demoModeButton")}</Button>
           </div>
         )}
       </div>

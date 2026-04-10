@@ -9,7 +9,7 @@ const sizeStyles = {
   lg: "w-12 h-12",
 };
 
-export function Loading({ text = "Reading the stars...", size = "md" }: LoadingProps) {
+export function Loading({ text = "読み込み中...", size = "md" }: LoadingProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 py-8">
       <div className={`${sizeStyles[size]} relative`}>

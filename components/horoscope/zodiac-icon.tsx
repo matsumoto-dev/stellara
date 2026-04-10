@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { SunSign } from "@/lib/db/types";
 
 const ZODIAC_SYMBOLS: Record<SunSign, string> = {
@@ -13,21 +14,6 @@ const ZODIAC_SYMBOLS: Record<SunSign, string> = {
   capricorn: "\u2651",
   aquarius: "\u2652",
   pisces: "\u2653",
-};
-
-const ZODIAC_LABELS: Record<SunSign, string> = {
-  aries: "Aries",
-  taurus: "Taurus",
-  gemini: "Gemini",
-  cancer: "Cancer",
-  leo: "Leo",
-  virgo: "Virgo",
-  libra: "Libra",
-  scorpio: "Scorpio",
-  sagittarius: "Sagittarius",
-  capricorn: "Capricorn",
-  aquarius: "Aquarius",
-  pisces: "Pisces",
 };
 
 interface ZodiacIconProps {
@@ -49,12 +35,15 @@ export function ZodiacIcon({
   showLabel = false,
   className = "",
 }: ZodiacIconProps) {
+  const t = useTranslations("zodiac");
+  const label = t(sign);
+
   return (
-    <span className={`inline-flex items-center gap-1.5 ${className}`} title={ZODIAC_LABELS[sign]}>
+    <span className={`inline-flex items-center gap-1.5 ${className}`} title={label}>
       <span className={`${sizeStyles[size]} leading-none`}>{ZODIAC_SYMBOLS[sign]}</span>
-      {showLabel && <span className="text-sm text-text-muted">{ZODIAC_LABELS[sign]}</span>}
+      {showLabel && <span className="text-sm text-text-muted">{label}</span>}
     </span>
   );
 }
 
-export { ZODIAC_LABELS, ZODIAC_SYMBOLS };
+export { ZODIAC_SYMBOLS };

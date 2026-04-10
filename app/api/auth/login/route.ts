@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     const parsed = loginSchema.safeParse(body);
 
     if (!parsed.success) {
-      return NextResponse.json({ success: false, error: "Invalid input" }, { status: 400 });
+      return NextResponse.json({ success: false, error: "入力内容に誤りがあります" }, { status: 400 });
     }
 
     const { email, password } = parsed.data;
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       return NextResponse.json(
-        { success: false, error: "Invalid email or password" },
+        { success: false, error: "メールアドレスまたはパスワードが正しくありません" },
         { status: 401 },
       );
     }
@@ -35,7 +35,8 @@ export async function POST(request: NextRequest) {
       success: true,
       data: { userId: data.user.id },
     });
-  } catch {
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+  } catch (error) {
+    console.error("[auth/login] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }
