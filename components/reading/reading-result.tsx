@@ -26,18 +26,84 @@ function truncateForShare(text: string, max = 200): string {
   return `${text.slice(0, max - 1)}…`;
 }
 
+const SECTION_LABELS: Record<string, string> = {
+  CardReveal: "カードの啓示",
+  Synthesis: "統合リーディング",
+  Guidance: "星からの導き",
+  OverallEnergy: "今日のエネルギー",
+  KeyTheme: "テーマ",
+  Advice: "アドバイス",
+  LuckyElement: "ラッキーエレメント",
+  Opening: "はじまり",
+  Reading: "鑑定",
+  Reflection: "リフレクション",
+};
+
+const TYPE_LABELS: Record<string, string> = {
+  tarot: "タロット鑑定",
+  personal: "パーソナル鑑定",
+  horoscope: "デイリーホロスコープ",
+  weekly: "ウィークリーホロスコープ",
+  chat: "チャット",
+};
+
+interface ParsedSection {
+  readonly tag: string | null;
+  readonly content: string;
+}
+
+function parseSections(raw: string): readonly ParsedSection[] {
+  const regex = /\[(\w+)\]\s*/g;
+  const sections: ParsedSection[] = [];
+  let lastIndex = 0;
+  let lastTag: string | null = null;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(raw)) !== null) {
+    const textBefore = raw.slice(lastIndex, match.index).trim();
+    if (textBefore) {
+      sections.push({ tag: lastTag, content: textBefore });
+    }
+    lastTag = match[1];
+    lastIndex = regex.lastIndex;
+  }
+
+  const remaining = raw.slice(lastIndex).trim();
+  if (remaining) {
+    sections.push({ tag: lastTag, content: remaining });
+  }
+
+  return sections.length > 0 ? sections : [{ tag: null, content: raw }];
+}
+
 export function ReadingResult({ content, type, sign, rejected }: ReadingResultProps) {
   const t = useTranslations("reading");
+  const sections = parseSections(content);
 
   return (
     <Card glow={!rejected}>
       <div className="flex items-center gap-2 mb-4">
         <Badge variant={rejected ? "muted" : "accent"}>
-          {type.charAt(0).toUpperCase() + type.slice(1)} Reading
+          {TYPE_LABELS[type] ?? `${type.charAt(0).toUpperCase()}${type.slice(1)} Reading`}
         </Badge>
         {rejected && <Badge variant="muted">{t("contentFiltered")}</Badge>}
       </div>
-      <div className="text-text/90 leading-relaxed whitespace-pre-line">{content}</div>
+
+      <div className="space-y-5">
+        {sections.map((section, i) => (
+          <div key={`${section.tag ?? "body"}-${i}`}>
+            {section.tag && SECTION_LABELS[section.tag] && (
+              <h3 className="font-heading text-sm font-semibold text-accent/80 tracking-wide mb-2">
+                {SECTION_LABELS[section.tag]}
+              </h3>
+            )}
+            <div className="text-text/90 leading-relaxed whitespace-pre-line">
+              {section.content}
+            </div>
+          </div>
+        ))}
+      </div>
+
       <p className="mt-6 text-xs text-text-muted italic">{t("guidanceNote")}</p>
       {!rejected && (
         <div className="mt-4 pt-4 border-t border-text-muted/10">
