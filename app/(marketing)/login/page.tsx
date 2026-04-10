@@ -7,8 +7,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-const DEMO_ENABLED = process.env.NEXT_PUBLIC_DEMO_ENABLED === "true";
-
 export default function LoginPage() {
   const router = useRouter();
   const t = useTranslations("auth.login");
@@ -84,8 +82,7 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      {DEMO_ENABLED && (
-        <div className="w-full max-w-sm mt-6">
+      <div className="w-full max-w-sm mt-6">
           <div className="relative flex items-center gap-3">
             <hr className="flex-1 border-border" />
             <span className="text-xs text-text-muted shrink-0">{t("demoSeparator")}</span>
@@ -107,7 +104,7 @@ export default function LoginPage() {
             </p>
           </div>
         </div>
-      )}
+      </div>
 
       <div className="mt-4 space-y-2 text-center text-sm">
         <p>
