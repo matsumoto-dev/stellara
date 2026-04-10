@@ -25,3 +25,5 @@ reviews/qa-screenshots/
 # misc
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel

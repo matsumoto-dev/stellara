@@ -181,6 +181,7 @@ export async function POST(request: NextRequest) {
         { status: error.statusCode },
       );
     }
+    console.error("[reading] unhandled error:", error);
     return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }

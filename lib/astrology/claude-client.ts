@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { getServerEnv } from "@/lib/config";
 
-const DEFAULT_MODEL = "claude-haiku-4-5-20241022";
+const DEFAULT_MODEL = "claude-haiku-4-5-20251001";
 const MAX_RETRIES = 3;
 const RETRY_DELAYS = [1000, 2000, 4000];
 
