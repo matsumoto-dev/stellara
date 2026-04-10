@@ -59,10 +59,10 @@ export function SubscriptionSection({
       if (json.success && json.url) {
         window.location.href = json.url;
       } else {
-        setError(json.error ?? "Failed to start checkout");
+        setError(json.error ?? "決済の開始に失敗しました");
       }
     } catch {
-      setError("Failed to connect to server");
+      setError("サーバーに接続できませんでした");
     } finally {
       setLoading(false);
     }
@@ -77,10 +77,10 @@ export function SubscriptionSection({
       if (json.success && json.url) {
         window.location.href = json.url;
       } else {
-        setError(json.error ?? "Failed to open portal");
+        setError(json.error ?? "管理画面を開けませんでした");
       }
     } catch {
-      setError("Failed to connect to server");
+      setError("サーバーに接続できませんでした");
     } finally {
       setLoading(false);
     }
@@ -88,7 +88,7 @@ export function SubscriptionSection({
 
   const isPro = plan === "pro";
   const formattedDate = periodEnd
-    ? new Date(periodEnd).toLocaleDateString("en-US", {
+    ? new Date(periodEnd).toLocaleDateString("ja-JP", {
         year: "numeric",
         month: "long",
         day: "numeric",

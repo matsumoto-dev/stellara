@@ -26,7 +26,10 @@ export async function GET() {
       .single();
 
     if (profileError || !profile) {
-      return NextResponse.json({ success: false, error: "Profile not found" }, { status: 404 });
+      return NextResponse.json(
+        { success: false, error: "プロフィールが見つかりませんでした。設定画面から星座を登録してください。" },
+        { status: 404 },
+      );
     }
 
     const sign = profile.sun_sign as SunSign;
@@ -85,6 +88,7 @@ export async function GET() {
         { status: error.statusCode },
       );
     }
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    console.error("[horoscope] unhandled error:", error);
+    return NextResponse.json({ success: false, error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 }

@@ -67,6 +67,10 @@ export async function POST(request: Request) {
         { status: error.statusCode },
       );
     }
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    console.error("[stripe/checkout] unhandled error:", error);
+    return NextResponse.json(
+      { success: false, error: "決済サービスに接続できませんでした。しばらくしてからお試しください。" },
+      { status: 500 },
+    );
   }
 }
