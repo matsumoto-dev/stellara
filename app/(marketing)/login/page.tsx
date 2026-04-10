@@ -103,7 +103,6 @@ export default function LoginPage() {
               {t("demoDisclaimer")}
             </p>
           </div>
-        </div>
       </div>
 
       <div className="mt-4 space-y-2 text-center text-sm">
