@@ -4,13 +4,9 @@
 
 ## カード
 
-{{#cards}}
-- **{{name}}** — ポジション: {{position}}、向き: {{orientation}}
-{{/cards}}
+{{cards}}
 
-{{#question}}
 質問者の問い: 「{{question}}」
-{{/question}}
 
 ## 要件
 

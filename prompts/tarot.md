@@ -4,13 +4,9 @@ Perform a tarot reading based on the following drawn cards.
 
 ## Cards
 
-{{#cards}}
-- **{{name}}** — Position: {{position}}, Orientation: {{orientation}}
-{{/cards}}
+{{cards}}
 
-{{#question}}
 The querent's question: "{{question}}"
-{{/question}}
 
 ## Requirements
 

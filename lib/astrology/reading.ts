@@ -154,8 +154,8 @@ export async function generateTarotReading(vars: TarotVars): Promise<ReadingResu
 
   const templateVars: Record<string, string> = {
     cards: formatTarotCards(vars.cards),
+    question: vars.question ?? "（特になし）",
   };
-  if (vars.question) templateVars.question = vars.question;
 
   const userMessage = renderPrompt(loadPrompt(localizedPromptName("tarot")), templateVars);
   const response = await callClaude({ systemPrompt, userMessage });
