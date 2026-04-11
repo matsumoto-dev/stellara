@@ -25,6 +25,7 @@ const ZODIAC_SYMBOLS: Record<SunSign, string> = {
 interface ProfileSetupProps {
   onComplete: (data: {
     sign: SunSign;
+    profileSign: SunSign;
     date: string;
     content: string;
     cached: boolean;

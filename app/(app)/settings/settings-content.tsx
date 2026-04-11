@@ -7,6 +7,7 @@ import { DeleteAccountDialog } from "@/components/settings/delete-account-dialog
 import { SubscriptionSection } from "@/components/settings/subscription-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { clearSignOverride } from "@/lib/client/sign-override";
 import type { PlanType, SubscriptionStatus } from "@/lib/db/types";
 
 interface SettingsContentProps {
@@ -45,6 +46,7 @@ export function SettingsContent({
         setLoggingOut(false);
         return;
       }
+      clearSignOverride();
       window.location.href = "/login";
     } catch {
       setLoggingOut(false);

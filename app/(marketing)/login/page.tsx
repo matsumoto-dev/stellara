@@ -7,6 +7,7 @@ import { useState } from "react";
 import { StarOrnament, StellaraMark } from "@/components/icons/stellara-mark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { clearSignOverride } from "@/lib/client/sign-override";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,6 +39,8 @@ export default function LoginPage() {
         setError(json.error ?? t("error"));
         return;
       }
+      // Clear any sign override from a previous user/test session
+      clearSignOverride();
       router.push("/dashboard");
     } catch {
       setError(tCommon("error.serverConnection"));
@@ -59,6 +62,7 @@ export default function LoginPage() {
         setError(json.error ?? t("error"));
         return;
       }
+      clearSignOverride();
       router.push("/dashboard");
     } catch {
       setError(tCommon("error.serverConnection"));

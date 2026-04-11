@@ -21,10 +21,12 @@ const ZODIAC_SYMBOLS: Record<SunSign, string> = {
 
 interface SignSwitcherProps {
   currentSign: SunSign;
+  /** The user's actual profile sign — used to show "reset to my sign" affordance. */
+  profileSign?: SunSign;
   onChange: (sign: SunSign) => void;
 }
 
-export function SignSwitcher({ currentSign, onChange }: SignSwitcherProps) {
+export function SignSwitcher({ currentSign, profileSign, onChange }: SignSwitcherProps) {
   const tZodiac = useTranslations("zodiac");
   const tSwitcher = useTranslations("signSwitcher");
   const [open, setOpen] = useState(false);
@@ -96,9 +98,18 @@ export function SignSwitcher({ currentSign, onChange }: SignSwitcherProps) {
             id={listboxId}
             role="listbox"
             aria-label={tSwitcher("switchSign")}
-            className="absolute z-50 mt-2 left-0 w-72 p-3 rounded-xl border border-accent/30 bg-bg-card shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+            className="absolute z-50 mt-2 right-0 w-72 p-3 rounded-xl border border-gold-leaf/30 bg-night-veil shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
           >
             <p className="text-xs text-text-muted px-2 mb-2">{tSwitcher("hint")}</p>
+            {profileSign && profileSign !== currentSign && (
+              <button
+                type="button"
+                onClick={() => handleSelect(profileSign)}
+                className="w-full text-left px-2 py-1.5 mb-2 text-xs text-gold-pale hover:text-gold-glow transition-colors"
+              >
+                ← {tZodiac(profileSign)}（あなたの星座）に戻す
+              </button>
+            )}
             <div className="grid grid-cols-3 gap-1.5">
               {SUN_SIGNS.map((sign) => {
                 const isActive = sign === currentSign;

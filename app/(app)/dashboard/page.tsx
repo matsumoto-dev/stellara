@@ -8,41 +8,15 @@ import { SignSwitcher } from "@/components/horoscope/sign-switcher";
 import { MoonIcon, StarOrnament, SunIcon } from "@/components/icons/stellara-mark";
 import { ProfileSetup } from "@/components/profile/profile-setup";
 import { Card, CardTitle } from "@/components/ui/card";
-import { SUN_SIGNS, type SunSign } from "@/lib/db/types";
+import { readSignOverride, writeSignOverride } from "@/lib/client/sign-override";
+import type { SunSign } from "@/lib/db/types";
 
 interface HoroscopeData {
   sign: SunSign;
+  profileSign: SunSign;
   date: string;
   content: string;
   cached: boolean;
-}
-
-const SIGN_OVERRIDE_KEY = "stellara:viewing_sign";
-
-function readSignOverride(): SunSign | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const v = window.sessionStorage.getItem(SIGN_OVERRIDE_KEY);
-    if (v && (SUN_SIGNS as readonly string[]).includes(v)) {
-      return v as SunSign;
-    }
-  } catch {
-    // sessionStorage may be blocked
-  }
-  return null;
-}
-
-function writeSignOverride(sign: SunSign | null): void {
-  if (typeof window === "undefined") return;
-  try {
-    if (sign) {
-      window.sessionStorage.setItem(SIGN_OVERRIDE_KEY, sign);
-    } else {
-      window.sessionStorage.removeItem(SIGN_OVERRIDE_KEY);
-    }
-  } catch {
-    // ignore
-  }
 }
 
 export default function DashboardPage() {
@@ -151,6 +125,7 @@ export default function DashboardPage() {
         {horoscope && !needsSetup && (
           <SignSwitcher
             currentSign={pendingSign ?? horoscope.sign}
+            profileSign={horoscope.profileSign}
             onChange={handleSignChange}
           />
         )}

@@ -34,26 +34,24 @@ export async function GET(request: Request) {
         ? (querySign as SunSign)
         : null;
 
-    let sign: SunSign;
-    if (validQuerySign) {
-      sign = validQuerySign;
-    } else {
-      // Get user's profile for sun sign
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("sun_sign")
-        .eq("id", user.id)
-        .single();
+    // Always look up the profile sign so we can return it in the response.
+    // The client uses `profileSign` to know what the user's "real" sign is
+    // (so they can reset back to it after switching).
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("sun_sign")
+      .eq("id", user.id)
+      .single();
 
-      if (profileError || !profile) {
-        return NextResponse.json(
-          { success: false, error: "プロフィールが見つかりませんでした", code: "PROFILE_NOT_FOUND" },
-          { status: 404 },
-        );
-      }
-      sign = profile.sun_sign as SunSign;
+    if (profileError || !profile) {
+      return NextResponse.json(
+        { success: false, error: "プロフィールが見つかりませんでした", code: "PROFILE_NOT_FOUND" },
+        { status: 404 },
+      );
     }
 
+    const profileSign = profile.sun_sign as SunSign;
+    const sign: SunSign = validQuerySign ?? profileSign;
     const today = getTodayDate();
 
     // Check cache first
@@ -69,6 +67,7 @@ export async function GET(request: Request) {
         success: true,
         data: {
           sign,
+          profileSign,
           date: today,
           content: cached.content,
           cached: true,
@@ -97,6 +96,7 @@ export async function GET(request: Request) {
       success: true,
       data: {
         sign,
+        profileSign,
         date: today,
         content: result.content,
         cached: false,
@@ -171,7 +171,7 @@ export async function PATCH(request: Request) {
     if (cached) {
       return NextResponse.json({
         success: true,
-        data: { sign, date: today, content: cached.content, cached: true },
+        data: { sign, profileSign: sign, date: today, content: cached.content, cached: true },
       });
     }
 
@@ -192,7 +192,7 @@ export async function PATCH(request: Request) {
 
     return NextResponse.json({
       success: true,
-      data: { sign, date: today, content: result.content, cached: false },
+      data: { sign, profileSign: sign, date: today, content: result.content, cached: false },
     });
   } catch (error) {
     if (error instanceof AuthError) {

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { StarOrnament, StellaraMark } from "@/components/icons/stellara-mark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { clearSignOverride } from "@/lib/client/sign-override";
 
 interface DebugInfo {
   code?: string;
@@ -59,6 +60,8 @@ export default function SignupPage() {
         if (json.debug) setDebug(json.debug);
         return;
       }
+      // Clear any leftover sign override from previous tests
+      clearSignOverride();
       // If auto sign-in worked, session is established — go to dashboard.
       // If not (rare), redirect to login so the user can sign in manually.
       if (json.data?.needsLogin) {

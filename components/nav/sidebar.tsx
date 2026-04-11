@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { StellaraMark } from "@/components/icons/stellara-mark";
+import { clearSignOverride } from "@/lib/client/sign-override";
 
 interface NavItem {
   readonly href: string;
@@ -38,6 +39,8 @@ export function Sidebar() {
         setLoggingOut(false);
         return;
       }
+      // Clear any leftover sign override so the next user starts fresh
+      clearSignOverride();
       // Hard redirect to clear all client cache and ensure middleware re-evaluates
       window.location.href = "/login";
     } catch {
