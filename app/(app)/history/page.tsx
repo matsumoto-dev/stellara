@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { ReadingCard } from "@/components/history/reading-card";
+import { ProGate } from "@/components/settings/pro-gate";
 import { Loading } from "@/components/ui/loading";
 import type { ReadingType } from "@/lib/db/types";
 
@@ -87,17 +87,7 @@ export default function HistoryPage() {
 
       {loading && <Loading text={t("loading")} size="lg" />}
 
-      {upgradeRequired && (
-        <div className="text-center py-12 space-y-4">
-          <p className="text-text-muted">{t("upgradePrompt")}</p>
-          <Link
-            href="/settings"
-            className="inline-block bg-accent text-bg px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            {t("upgrade")}
-          </Link>
-        </div>
-      )}
+      {upgradeRequired && <ProGate feature="history" />}
 
       {error && (
         <div className="text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg p-4">

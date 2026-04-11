@@ -273,6 +273,16 @@
     "defaultMessage": "予期しないエラーが発生しました。もう一度お試しください。",
     "tryAgain": "もう一度試す"
   },
+  "proGate": {
+    "title": "{feature}はProプラン限定です",
+    "description": "Proプランにアップグレードすると、この機能をはじめ、鑑定やタロットが無制限でお楽しみいただけます。",
+    "cta": "プランを見る",
+    "features": {
+      "chat": "星とのチャット",
+      "compatibility": "相性鑑定",
+      "history": "鑑定履歴"
+    }
+  },
   "share": {
     "pinterest": "Pinterest",
     "x": "Xでシェア",

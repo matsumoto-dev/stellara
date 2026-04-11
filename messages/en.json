@@ -273,6 +273,16 @@
     "defaultMessage": "An unexpected error occurred. Please try again.",
     "tryAgain": "Try again"
   },
+  "proGate": {
+    "title": "{feature} is a Pro feature",
+    "description": "Upgrade to Pro to unlock this and enjoy unlimited readings, tarot, and more.",
+    "cta": "View Plans",
+    "features": {
+      "chat": "Chat with the stars",
+      "compatibility": "Compatibility Reading",
+      "history": "Reading History"
+    }
+  },
   "share": {
     "pinterest": "Pinterest",
     "x": "X",
