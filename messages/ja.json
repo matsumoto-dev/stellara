@@ -83,6 +83,11 @@
     "todaysHoroscope": "今日のホロスコープ",
     "loadError": "ホロスコープを読み込めませんでした"
   },
+  "signSwitcher": {
+    "switchSign": "星座を切り替える",
+    "hint": "他の星座のホロスコープも見てみる",
+    "close": "閉じる"
+  },
   "reading": {
     "title": "パーソナル鑑定",
     "subtitle": "気になることを星に問いかけてみてください。",

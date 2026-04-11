@@ -83,6 +83,11 @@
     "todaysHoroscope": "Today's Horoscope",
     "loadError": "Failed to load horoscope"
   },
+  "signSwitcher": {
+    "switchSign": "Switch zodiac sign",
+    "hint": "Try a different sign's horoscope",
+    "close": "Close"
+  },
   "reading": {
     "title": "Personal Reading",
     "subtitle": "Share your question and the stars will reveal their guidance.",

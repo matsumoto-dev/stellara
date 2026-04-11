@@ -14,26 +14,46 @@ function getTodayDate(): string {
   return new Date().toISOString().split("T")[0];
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const supabase = await createClient();
     const user = await requireAuth(supabase);
 
-    // Get user's profile for sun sign
-    const { data: profile, error: profileError } = await supabase
-      .from("profiles")
-      .select("sun_sign")
-      .eq("id", user.id)
-      .single();
+    // Optional ?sign= query lets the user view a different sign without
+    // mutating their profile. Useful for portfolio/demo viewers exploring.
+    //
+    // Cost note: AI generation is naturally bounded by the daily_horoscopes
+    // table's UNIQUE (sign, date) constraint — at most 12 generations per day
+    // GLOBALLY (one per zodiac sign), regardless of how many users hit ?sign=.
+    // After 12 unique sign requests in a day, all further requests are cache hits.
+    // No per-user rate limit is needed for this reason.
+    const url = new URL(request.url);
+    const querySign = url.searchParams.get("sign");
+    const validQuerySign =
+      querySign && (SUN_SIGNS as readonly string[]).includes(querySign)
+        ? (querySign as SunSign)
+        : null;
 
-    if (profileError || !profile) {
-      return NextResponse.json(
-        { success: false, error: "プロフィールが見つかりませんでした", code: "PROFILE_NOT_FOUND" },
-        { status: 404 },
-      );
+    let sign: SunSign;
+    if (validQuerySign) {
+      sign = validQuerySign;
+    } else {
+      // Get user's profile for sun sign
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("sun_sign")
+        .eq("id", user.id)
+        .single();
+
+      if (profileError || !profile) {
+        return NextResponse.json(
+          { success: false, error: "プロフィールが見つかりませんでした", code: "PROFILE_NOT_FOUND" },
+          { status: 404 },
+        );
+      }
+      sign = profile.sun_sign as SunSign;
     }
 
-    const sign = profile.sun_sign as SunSign;
     const today = getTodayDate();
 
     // Check cache first
