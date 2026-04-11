@@ -1,19 +1,53 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  EB_Garamond,
+  Manrope,
+  Noto_Serif_JP,
+  Shippori_Mincho,
+} from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { getOrganizationJsonLd, getWebSiteJsonLd } from "@/lib/seo/json-ld";
 import "./globals.css";
 
-const inter = Inter({
+// Display serif (Latin)
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-heading-latin",
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+// Reading serif (Latin)
+const ebGaramond = EB_Garamond({
   subsets: ["latin"],
-  variable: "--font-heading",
+  weight: ["400", "500", "600"],
+  variable: "--font-reading-latin",
+  display: "swap",
+});
+
+// UI sans (Latin)
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-body-latin",
+  display: "swap",
+});
+
+// Display serif (CJK)
+const shippori = Shippori_Mincho({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-heading-jp",
+  display: "swap",
+});
+
+// Reading serif (CJK)
+const notoSerifJp = Noto_Serif_JP({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-reading-jp",
   display: "swap",
 });
 
@@ -65,7 +99,10 @@ export default async function RootLayout({
   const t = await getTranslations("common");
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
+    <html
+      lang={locale}
+      className={`${cormorant.variable} ${ebGaramond.variable} ${manrope.variable} ${shippori.variable} ${notoSerifJp.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.costarastrology.com)",
+      "WebFetch(domain:www.sanctuaryworld.com)",
+      "WebFetch(domain:labyrinthos.co)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:ijr.design)"
+    ]
+  }
+}

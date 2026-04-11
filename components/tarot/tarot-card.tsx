@@ -129,46 +129,49 @@ export function TarotCard({ drawn, revealed, index }: TarotCardProps) {
     >
       <div
         className={`
-          relative overflow-hidden rounded-xl
-          border-2 border-accent/30
+          relative overflow-hidden rounded-md
+          border border-gold-leaf/40
           bg-gradient-to-b ${getCardGradient(drawn)}
-          shadow-[0_0_20px_rgba(212,175,55,0.12)]
+          shadow-[0_0_28px_-6px_rgba(201,169,97,0.35),inset_0_0_0_1px_rgba(201,169,97,0.15)]
           aspect-[2/3]
           flex flex-col items-center justify-between
           p-3
-          ${drawn.orientation === "reversed" ? "rotate-180" : ""}
         `}
       >
-        {/* Corner decorations */}
-        <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-accent/40 rounded-tl-lg" />
-        <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-accent/40 rounded-tr-lg" />
-        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-accent/40 rounded-bl-lg" />
-        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-accent/40 rounded-br-lg" />
+        {/* Corner flourish brackets — gilded */}
+        <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-gold-leaf/60" />
+        <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-gold-leaf/60" />
+        <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-gold-leaf/60" />
+        <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-gold-leaf/60" />
 
-        {/* Inner border */}
-        <div className="absolute inset-2 border border-accent/15 rounded-lg pointer-events-none" />
+        {/* Inner thin border */}
+        <div className="absolute inset-3 border border-gold-leaf/15 pointer-events-none" />
 
-        {/* Roman numeral */}
+        {/* Roman numeral (always upright) */}
         {romanNum && (
-          <p className="font-heading text-xs text-accent/70 tracking-widest mt-1">
+          <p className="font-heading text-xs text-gold-pale/80 tracking-widest mt-1 z-10">
             {romanNum}
           </p>
         )}
         {!romanNum && <div className="h-4" />}
 
-        {/* Card symbol */}
-        <div className="flex-1 flex items-center justify-center">
-          <span className="text-5xl drop-shadow-lg">{getCardSymbol(drawn)}</span>
+        {/* Card symbol — this rotates 180° on reversed cards (the "image") */}
+        <div
+          className={`flex-1 flex items-center justify-center z-10 ${
+            drawn.orientation === "reversed" ? "rotate-180" : ""
+          }`}
+        >
+          <span className="text-5xl drop-shadow-[0_2px_8px_rgba(255,217,106,0.4)]">
+            {getCardSymbol(drawn)}
+          </span>
         </div>
 
-        {/* Card name */}
-        <div className="text-center space-y-0.5 mb-1">
-          <p className="font-heading text-sm font-semibold text-text leading-tight">
+        {/* Card name (always upright, even for reversed) */}
+        <div className="text-center space-y-0.5 mb-1 z-10">
+          <p className="font-heading text-sm font-semibold text-moonlight leading-tight">
             {drawn.card.name}
           </p>
-          {jaName && (
-            <p className="text-xs text-accent/70">{jaName}</p>
-          )}
+          {jaName && <p className="text-xs text-gold-pale/70">{jaName}</p>}
         </div>
       </div>
 
