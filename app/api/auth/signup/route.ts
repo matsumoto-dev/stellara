@@ -42,9 +42,15 @@ export async function POST(request: NextRequest) {
 
     const supabase = await createClient();
 
+    // Build emailRedirectTo from the current request origin so the confirmation
+    // email link goes to the deployed domain (not Supabase's default Site URL).
+    const origin = new URL(request.url).origin;
+    const emailRedirectTo = `${origin}/api/auth/callback?next=/dashboard`;
+
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
+      options: { emailRedirectTo },
     });
 
     if (authError || !authData.user) {
@@ -63,17 +69,24 @@ export async function POST(request: NextRequest) {
     // auth.uid() = id would block the insert.
     const admin = createAdminClient();
 
-    const { error: profileError } = await admin.from("profiles").insert({
-      id: userId,
-      email,
-      display_name: display_name ?? null,
-      birth_date,
-      sun_sign: sunSign,
-      plan: "free",
-    });
+    // UPSERT to handle the retry case (user re-attempts signup before email
+    // confirmation, in which case the profile row may already exist).
+    const { error: profileError } = await admin
+      .from("profiles")
+      .upsert(
+        {
+          id: userId,
+          email,
+          display_name: display_name ?? null,
+          birth_date,
+          sun_sign: sunSign,
+          plan: "free",
+        },
+        { onConflict: "id" },
+      );
 
     if (profileError) {
-      console.error("[auth/signup] profile insert failed:", profileError);
+      console.error("[auth/signup] profile upsert failed:", profileError);
       return NextResponse.json(
         { success: false, error: "プロフィールの作成に失敗しました" },
         { status: 500 },
