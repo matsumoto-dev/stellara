@@ -54,7 +54,12 @@ export default function ReadingPage() {
       </div>
 
       {!result && !loading && (
-        <ReadingForm onSubmit={handleSubmit} loading={loading} buttonText={t("revealReading")} />
+        <ReadingForm
+          onSubmit={handleSubmit}
+          loading={loading}
+          placeholder={t("placeholder")}
+          buttonText={t("revealReading")}
+        />
       )}
 
       {loading && <Loading text={t("loading")} size="lg" />}

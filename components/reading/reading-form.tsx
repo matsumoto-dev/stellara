@@ -14,8 +14,8 @@ interface ReadingFormProps {
 export function ReadingForm({
   onSubmit,
   loading,
-  placeholder = "What would you like guidance on? (optional)",
-  buttonText = "Get Reading",
+  placeholder = "聞いてみたいことを入力（任意）",
+  buttonText = "鑑定する",
 }: ReadingFormProps) {
   const [question, setQuestion] = useState("");
 

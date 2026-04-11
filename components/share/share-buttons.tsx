@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
   buildFacebookUrl,
@@ -32,6 +33,7 @@ function trackShare(channel: ShareChannel, readingType: ShareReadingType): void 
 }
 
 export function ShareButtons({ type, text, sign, pageUrl: pageUrlProp, className = "" }: ShareButtonsProps) {
+  const t = useTranslations("share");
   // Use "https://stellara.chat" as the SSR-safe fallback so that the initial
   // client render matches the server-rendered HTML. After mount, update to the
   // actual origin so share URLs reflect the real host (e.g. localhost in dev).
@@ -59,7 +61,7 @@ export function ShareButtons({ type, text, sign, pageUrl: pageUrlProp, className
         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-text-muted/20 text-text-muted hover:text-white hover:border-[#E60023]/50 hover:bg-[#E60023]/10 transition-colors duration-150"
       >
         <PinterestIcon className="w-4 h-4" />
-        <span>Save</span>
+        <span>{t("pinterest")}</span>
       </a>
 
       {/* X (Twitter) Web Intent */}
@@ -67,12 +69,12 @@ export function ShareButtons({ type, text, sign, pageUrl: pageUrlProp, className
         href={xUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Share on X"
+        aria-label={t("x")}
         onClick={() => trackShare("x", type)}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-text-muted/20 text-text-muted hover:text-white hover:border-white/30 hover:bg-white/10 transition-colors duration-150"
       >
         <XIcon className="w-4 h-4" />
-        <span>Share</span>
+        <span>{t("x")}</span>
       </a>
 
       {/* Facebook Share */}
@@ -80,12 +82,12 @@ export function ShareButtons({ type, text, sign, pageUrl: pageUrlProp, className
         href={facebookUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Share on Facebook"
+        aria-label={t("facebook")}
         onClick={() => trackShare("facebook", type)}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-text-muted/20 text-text-muted hover:text-white hover:border-[#1877F2]/50 hover:bg-[#1877F2]/10 transition-colors duration-150"
       >
         <FacebookIcon className="w-4 h-4" />
-        <span>Share</span>
+        <span>{t("facebook")}</span>
       </a>
 
       {/* WhatsApp Share */}
@@ -93,24 +95,24 @@ export function ShareButtons({ type, text, sign, pageUrl: pageUrlProp, className
         href={whatsAppUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Share on WhatsApp"
+        aria-label={t("whatsapp")}
         onClick={() => trackShare("whatsapp", type)}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-text-muted/20 text-text-muted hover:text-white hover:border-[#25D366]/50 hover:bg-[#25D366]/10 transition-colors duration-150"
       >
         <WhatsAppIcon className="w-4 h-4" />
-        <span>Send</span>
+        <span>{t("whatsapp")}</span>
       </a>
 
       {/* Download image */}
       <a
         href={imageUrl}
         download={`stellara-${type}.png`}
-        aria-label="Download reading image"
+        aria-label={t("download")}
         onClick={() => trackShare("download", type)}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-text-muted/20 text-text-muted hover:text-white hover:border-accent/50 hover:bg-accent/10 transition-colors duration-150"
       >
         <DownloadIcon className="w-4 h-4" />
-        <span>Download</span>
+        <span>{t("download")}</span>
       </a>
     </div>
   );

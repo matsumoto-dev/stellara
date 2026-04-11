@@ -122,6 +122,7 @@
     "emptyState": "星との対話を始めましょう。\n恋愛・仕事・人生のことなど、何でも聞いてみてください。",
     "loading": "星が考えています...",
     "inputPlaceholder": "気になることを聞いてみる...",
+    "send": "送信",
     "turnCounter": "{current}/{limit}回のやり取りを使用",
     "limitReached": "今回のやり取り上限に達しました。",
     "upgradePrompt": "Proプランにすると、もっとたくさん対話できます。",
@@ -271,6 +272,13 @@
     "title": "エラーが発生しました",
     "defaultMessage": "予期しないエラーが発生しました。もう一度お試しください。",
     "tryAgain": "もう一度試す"
+  },
+  "share": {
+    "pinterest": "Pinterest",
+    "x": "Xでシェア",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp",
+    "download": "画像を保存"
   },
   "zodiac": {
     "aries": "おひつじ座",

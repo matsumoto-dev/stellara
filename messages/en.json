@@ -122,6 +122,7 @@
     "emptyState": "Begin your conversation with the stars.\nAsk about love, career, or life guidance.",
     "loading": "The stars are thinking...",
     "inputPlaceholder": "Ask the stars...",
+    "send": "Send",
     "turnCounter": "{current}/{limit} turns used",
     "limitReached": "You've reached the turn limit for this session.",
     "upgradePrompt": "Upgrade to Pro for more conversations.",
@@ -271,6 +272,13 @@
     "title": "Something went wrong",
     "defaultMessage": "An unexpected error occurred. Please try again.",
     "tryAgain": "Try again"
+  },
+  "share": {
+    "pinterest": "Pinterest",
+    "x": "X",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp",
+    "download": "Download"
   },
   "zodiac": {
     "aries": "Aries",

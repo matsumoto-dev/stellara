@@ -18,6 +18,7 @@ coverage/
 test-results/
 playwright-report/
 reviews/qa-screenshots/
+reviews/e2e-manual/
 
 # vercel
 .vercel/

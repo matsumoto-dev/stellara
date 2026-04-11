@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { ShareButtons } from "@/components/share/share-buttons";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { parseSections, SECTION_LABELS } from "@/lib/reading/parse-sections";
 import type { ShareReadingType } from "@/lib/share/share-urls";
 
 interface ReadingResultProps {
@@ -26,19 +27,6 @@ function truncateForShare(text: string, max = 200): string {
   return `${text.slice(0, max - 1)}…`;
 }
 
-const SECTION_LABELS: Record<string, string> = {
-  CardReveal: "カードの啓示",
-  Synthesis: "統合リーディング",
-  Guidance: "星からの導き",
-  OverallEnergy: "今日のエネルギー",
-  KeyTheme: "テーマ",
-  Advice: "アドバイス",
-  LuckyElement: "ラッキーエレメント",
-  Opening: "はじまり",
-  Reading: "鑑定",
-  Reflection: "リフレクション",
-};
-
 const TYPE_LABELS: Record<string, string> = {
   tarot: "タロット鑑定",
   personal: "パーソナル鑑定",
@@ -46,35 +34,6 @@ const TYPE_LABELS: Record<string, string> = {
   weekly: "ウィークリーホロスコープ",
   chat: "チャット",
 };
-
-interface ParsedSection {
-  readonly tag: string | null;
-  readonly content: string;
-}
-
-function parseSections(raw: string): readonly ParsedSection[] {
-  const regex = /\[(\w+)\]\s*/g;
-  const sections: ParsedSection[] = [];
-  let lastIndex = 0;
-  let lastTag: string | null = null;
-  let match: RegExpExecArray | null;
-
-  while ((match = regex.exec(raw)) !== null) {
-    const textBefore = raw.slice(lastIndex, match.index).trim();
-    if (textBefore) {
-      sections.push({ tag: lastTag, content: textBefore });
-    }
-    lastTag = match[1];
-    lastIndex = regex.lastIndex;
-  }
-
-  const remaining = raw.slice(lastIndex).trim();
-  if (remaining) {
-    sections.push({ tag: lastTag, content: remaining });
-  }
-
-  return sections.length > 0 ? sections : [{ tag: null, content: raw }];
-}
 
 export function ReadingResult({ content, type, sign, rejected }: ReadingResultProps) {
   const t = useTranslations("reading");

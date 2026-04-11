@@ -4,9 +4,9 @@ import { getTranslations } from "next-intl/server";
 import { getFAQPageJsonLd, getSoftwareApplicationJsonLd } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = {
-  title: "Stellara — Your Personal AI Astrologer",
+  title: "Stellara — あなた専属のAI占星術師",
   description:
-    "Daily horoscopes, tarot readings, and cosmic guidance personalized to your birth chart. Powered by AI.",
+    "毎日のホロスコープ、タロット、パーソナル鑑定を、あなたの星座に合わせてお届けします。",
 };
 
 const FEATURE_ICONS = ["✦", "✨", "♠", "☁"] as const;
@@ -57,7 +57,7 @@ export default async function LandingPage() {
       {/* Hero */}
       <section className="flex flex-col items-center justify-center text-center px-6 py-24 max-w-3xl mx-auto">
         <div className="text-accent text-sm font-medium tracking-widest uppercase mb-6">
-          ✦ AI Astrology
+          ✦ AI ASTROLOGY
         </div>
         <h1 className="text-5xl md:text-6xl font-bold text-text mb-6 leading-tight">
           {t("hero.headline")}
