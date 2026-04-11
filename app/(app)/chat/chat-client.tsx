@@ -72,13 +72,19 @@ export function ChatClient() {
 
   return (
     <div className="max-w-2xl mx-auto flex flex-col h-[calc(100vh-8rem)]">
-      <div className="flex items-center justify-between mb-4">
+      <header className="flex items-start justify-between gap-4 mb-6">
         <div>
-          <h1 className="font-heading text-2xl font-bold text-text">{t("title")}</h1>
-          <p className="text-xs text-text-muted">{t("subtitle")}</p>
+          <div className="flex items-center gap-2 text-gold-leaf/70 text-xs tracking-[0.3em] uppercase mb-2">
+            <span>☁</span>
+            <span>Chat</span>
+          </div>
+          <h1 className="font-heading text-3xl md:text-4xl font-semibold text-moonlight tracking-tight">
+            {t("title")}
+          </h1>
+          <p className="text-xs text-text-muted mt-1">{t("subtitle")}</p>
         </div>
         <TurnCounter current={turnCount} limit={MAX_TURNS} />
-      </div>
+      </header>
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-3 mb-4 pr-1">
         {messages.length === 0 && !loading && (

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DailyCard } from "@/components/horoscope/daily-card";
 import { SignSwitcher } from "@/components/horoscope/sign-switcher";
+import { MoonIcon, StarOrnament, SunIcon } from "@/components/icons/stellara-mark";
 import { ProfileSetup } from "@/components/profile/profile-setup";
 import { Card, CardTitle } from "@/components/ui/card";
 import { SUN_SIGNS, type SunSign } from "@/lib/db/types";
@@ -127,14 +128,22 @@ export default function DashboardPage() {
     fetchHoroscope(sign);
   }
 
+  const greeting = getGreeting();
+  const TimeIcon = greeting === "evening" || greeting === "afternoon" ? null : SunIcon;
+  const isNight = greeting === "evening";
+
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      <div className="flex items-start justify-between gap-4 flex-wrap">
+    <div className="max-w-2xl mx-auto space-y-10">
+      <header className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="font-heading text-3xl font-bold text-text mb-1">
-            {t(`greeting.${getGreeting()}`)}
+          <div className="flex items-center gap-2 text-gold-leaf/70 text-xs tracking-[0.3em] uppercase mb-2">
+            {isNight ? <MoonIcon size={14} /> : TimeIcon && <TimeIcon size={14} />}
+            <span>Stellara</span>
+          </div>
+          <h1 className="font-heading text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight">
+            {t(`greeting.${greeting}`)}
           </h1>
-          <p className="text-text-muted">{t("subtitle")}</p>
+          <p className="text-text-muted text-sm leading-relaxed max-w-md">{t("subtitle")}</p>
         </div>
         {horoscope && !needsSetup && (
           <SignSwitcher
@@ -142,7 +151,7 @@ export default function DashboardPage() {
             onChange={handleSignChange}
           />
         )}
-      </div>
+      </header>
 
       {needsSetup ? (
         <ProfileSetup onComplete={handleSetupComplete} />
@@ -156,19 +165,29 @@ export default function DashboardPage() {
         />
       )}
 
-      <div>
-        <h2 className="font-heading text-lg font-semibold text-text mb-4">{t("explore")}</h2>
+      <section>
+        <div className="divider-ornament mb-5">
+          <span className="font-heading">{t("explore")}</span>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {quickActions.map((action) => (
-            <Link key={action.href} href={action.href}>
-              <Card className="hover:border-accent/30 transition-colors cursor-pointer h-full">
-                <span className="text-2xl mb-2 block">{action.icon}</span>
-                <CardTitle className="text-base">{t(action.titleKey)}</CardTitle>
-                <p className="text-xs text-text-muted mt-1">{t(action.descKey)}</p>
+            <Link key={action.href} href={action.href} className="group">
+              <Card className="h-full transition-all duration-300 group-hover:border-gold-leaf/40 group-hover:bg-night-mist/60 group-hover:shadow-[0_0_24px_-8px_rgba(201,169,97,0.3)] cursor-pointer">
+                <div className="text-gold-leaf text-2xl mb-3 group-hover:scale-110 transition-transform" aria-hidden="true">
+                  {action.icon}
+                </div>
+                <CardTitle className="text-base mb-1.5">{t(action.titleKey)}</CardTitle>
+                <p className="text-xs text-text-muted leading-relaxed">{t(action.descKey)}</p>
               </Card>
             </Link>
           ))}
         </div>
+      </section>
+
+      <div className="flex items-center justify-center gap-3 text-gold-leaf/30">
+        <StarOrnament size={6} />
+        <StarOrnament size={8} />
+        <StarOrnament size={6} />
       </div>
     </div>
   );

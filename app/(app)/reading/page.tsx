@@ -47,11 +47,17 @@ export default function ReadingPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      <div>
-        <h1 className="font-heading text-3xl font-bold text-text mb-1">{t("title")}</h1>
-        <p className="text-text-muted">{t("subtitle")}</p>
-      </div>
+    <div className="max-w-2xl mx-auto space-y-10">
+      <header>
+        <div className="flex items-center gap-2 text-gold-leaf/70 text-xs tracking-[0.3em] uppercase mb-2">
+          <span>✦</span>
+          <span>Personal Reading</span>
+        </div>
+        <h1 className="font-heading text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight">
+          {t("title")}
+        </h1>
+        <p className="text-text-muted text-sm leading-relaxed">{t("subtitle")}</p>
+      </header>
 
       {!result && !loading && (
         <ReadingForm

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { StarOrnament, StellaraMark } from "@/components/icons/stellara-mark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -57,69 +58,86 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] px-4">
-      <h1 className="font-heading text-3xl font-bold mb-6">{t("title")}</h1>
-      <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
-        <Input id="email" name="email" type="email" label={t("email")} required />
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          label={t("password")}
-          required
-          minLength={8}
+    <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 py-12">
+      <Link href="/" className="mb-8 group">
+        <StellaraMark
+          size={48}
+          className="text-gold-leaf drop-shadow-[0_0_16px_rgba(255,217,106,0.5)] group-hover:rotate-45 transition-transform duration-700"
         />
-        <Input id="birth_date" name="birth_date" type="date" label={t("birthDate")} required />
-        <Input id="display_name" name="display_name" type="text" label={t("displayName")} />
+      </Link>
 
-        <div className="space-y-3 pt-2">
-          <div className="flex items-start gap-2">
-            <input
-              id="terms_consent"
-              type="checkbox"
-              checked={termsConsent}
-              onChange={(e) => setTermsConsent(e.target.checked)}
-              className="mt-1"
-            />
-            <label htmlFor="terms_consent" className="text-sm text-text-muted">
-              I agree to the{" "}
-              <Link href="/terms" className="text-accent hover:underline" target="_blank">
-                {tCommon("termsLink")}
-              </Link>{" "}
-              and{" "}
-              <Link href="/privacy" className="text-accent hover:underline" target="_blank">
-                {tCommon("privacyLink")}
-              </Link>
+      <div className="divider-ornament max-w-[14rem] mb-6">
+        <StarOrnament size={6} />
+      </div>
+
+      <h1 className="font-heading text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight">
+        {t("title")}
+      </h1>
+      <p className="text-text-muted text-sm mb-10">星があなたを知るための、最初の一歩</p>
+
+      <div className="w-full max-w-sm bg-night-veil/40 backdrop-blur-sm border border-gold-leaf/15 rounded-xl p-8">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <Input id="email" name="email" type="email" label={t("email")} required />
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            label={t("password")}
+            required
+            minLength={8}
+          />
+          <Input id="birth_date" name="birth_date" type="date" label={t("birthDate")} required />
+          <Input id="display_name" name="display_name" type="text" label={t("displayName")} />
+
+          <div className="space-y-3 pt-2">
+            <label htmlFor="terms_consent" className="flex items-start gap-2 cursor-pointer">
+              <input
+                id="terms_consent"
+                type="checkbox"
+                checked={termsConsent}
+                onChange={(e) => setTermsConsent(e.target.checked)}
+                className="mt-1 accent-gold-leaf"
+              />
+              <span className="text-sm text-text-muted leading-relaxed">
+                <Link href="/terms" className="text-gold-pale hover:text-gold-glow transition-colors" target="_blank">
+                  {tCommon("termsLink")}
+                </Link>
+                ・
+                <Link href="/privacy" className="text-gold-pale hover:text-gold-glow transition-colors" target="_blank">
+                  {tCommon("privacyLink")}
+                </Link>
+                {" に同意します"}
+              </span>
+            </label>
+
+            <label htmlFor="entertainment_consent" className="flex items-start gap-2 cursor-pointer">
+              <input
+                id="entertainment_consent"
+                type="checkbox"
+                checked={entertainmentConsent}
+                onChange={(e) => setEntertainmentConsent(e.target.checked)}
+                className="mt-1 accent-gold-leaf"
+              />
+              <span className="text-sm text-text-muted leading-relaxed">
+                {t("entertainmentConsent")}
+              </span>
             </label>
           </div>
 
-          <div className="flex items-start gap-2">
-            <input
-              id="entertainment_consent"
-              type="checkbox"
-              checked={entertainmentConsent}
-              onChange={(e) => setEntertainmentConsent(e.target.checked)}
-              className="mt-1"
-            />
-            <label htmlFor="entertainment_consent" className="text-sm text-text-muted">
-              {t("entertainmentConsent")}
-            </label>
-          </div>
-        </div>
+          {error && (
+            <div className="text-red-300/90 text-sm bg-red-900/20 border border-red-400/20 rounded-lg p-3">
+              {error}
+            </div>
+          )}
 
-        {error && (
-          <div className="text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg p-3">
-            {error}
-          </div>
-        )}
-
-        <Button type="submit" loading={loading} disabled={!canSubmit} className="w-full" size="lg">
-          {t("submit")}
-        </Button>
-      </form>
-      <p className="mt-4 text-text-muted text-sm">
+          <Button type="submit" loading={loading} disabled={!canSubmit} className="w-full" size="lg">
+            {t("submit")}
+          </Button>
+        </form>
+      </div>
+      <p className="mt-6 text-text-muted text-sm">
         {t("hasAccount")}{" "}
-        <Link href="/login" className="text-accent hover:underline">
+        <Link href="/login" className="text-gold-pale hover:text-gold-glow transition-colors">
           {t("loginLink")}
         </Link>
       </p>

@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { StarOrnament } from "@/components/icons/stellara-mark";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SUN_SIGNS, type SunSign } from "@/lib/db/types";
@@ -62,13 +63,18 @@ export function ProfileSetup({ onComplete }: ProfileSetupProps) {
   }
 
   return (
-    <Card glow>
-      <h2 className="font-heading text-xl font-semibold text-text mb-1">
-        {t("title")}
-      </h2>
-      <p className="text-sm text-text-muted mb-5">{t("subtitle")}</p>
+    <Card variant="artifact">
+      <div className="text-center mb-6">
+        <div className="divider-ornament max-w-xs mx-auto mb-4">
+          <StarOrnament size={8} />
+        </div>
+        <h2 className="font-heading text-2xl font-semibold text-gold-pale tracking-tight mb-2">
+          {t("title")}
+        </h2>
+        <p className="text-sm text-text-muted leading-relaxed">{t("subtitle")}</p>
+      </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-5">
+      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mb-6">
         {SUN_SIGNS.map((sign) => (
           <button
             key={sign}
@@ -78,26 +84,33 @@ export function ProfileSetup({ onComplete }: ProfileSetupProps) {
               flex flex-col items-center gap-1 rounded-lg p-3 transition-all border
               ${
                 selected === sign
-                  ? "border-accent bg-accent/10 shadow-[0_0_12px_rgba(212,175,55,0.15)]"
-                  : "border-text-muted/10 bg-bg-card hover:border-accent/30"
+                  ? "border-gold-leaf bg-gold-leaf/15 shadow-[0_0_20px_-4px_rgba(201,169,97,0.45)]"
+                  : "border-ink-shadow/40 bg-night-deep/40 hover:border-gold-leaf/40 hover:bg-night-veil/60"
               }
             `}
           >
-            <span className="text-2xl">{ZODIAC_SYMBOLS[sign]}</span>
+            <span
+              className={`text-2xl transition-all ${
+                selected === sign
+                  ? "text-gold-glow drop-shadow-[0_0_10px_rgba(255,217,106,0.6)]"
+                  : "text-gold-leaf/70"
+              }`}
+              aria-hidden="true"
+            >
+              {ZODIAC_SYMBOLS[sign]}
+            </span>
             <span className="text-xs text-text-muted">{tZodiac(sign)}</span>
           </button>
         ))}
       </div>
 
-      {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
+      {error && <p className="text-red-300/90 text-sm mb-4 text-center">{error}</p>}
 
-      <Button
-        onClick={handleSubmit}
-        disabled={!selected}
-        loading={loading}
-      >
-        {t("submit")}
-      </Button>
+      <div className="flex justify-center">
+        <Button onClick={handleSubmit} disabled={!selected} loading={loading} size="lg">
+          {t("submit")}
+        </Button>
+      </div>
     </Card>
   );
 }

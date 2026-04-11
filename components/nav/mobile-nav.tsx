@@ -23,8 +23,8 @@ export function MobileNav() {
   const t = useTranslations("nav");
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-bg-card border-t border-text-muted/10 z-50">
-      <div className="flex justify-around py-2">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-night-deep/85 backdrop-blur-md border-t border-gold-leaf/20 z-50">
+      <div className="flex justify-around py-2.5">
         {NAV_ITEMS.map((item) => {
           const isActive =
             pathname === item.href ||
@@ -33,11 +33,13 @@ export function MobileNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center gap-0.5 px-3 py-1.5 text-xs transition-colors ${
-                isActive ? "text-accent" : "text-text-muted"
+              className={`flex flex-col items-center gap-1 px-3 py-1.5 text-[10px] tracking-wide transition-colors ${
+                isActive ? "text-gold-pale" : "text-text-muted hover:text-gold-pale/70"
               }`}
             >
-              <span className="text-lg">{item.icon}</span>
+              <span className="text-lg" aria-hidden="true">
+                {item.icon}
+              </span>
               {t(item.labelKey)}
             </Link>
           );

@@ -118,17 +118,19 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <main>{children}</main>
-          <footer className="text-center text-text-muted text-xs py-6 px-4 space-y-2">
-            <p>{t("disclaimer")}</p>
-            <p>
-              <a href="/terms" className="text-accent hover:underline">
-                {t("termsLink")}
-              </a>
-              {" · "}
-              <a href="/privacy" className="text-accent hover:underline">
-                {t("privacyLink")}
-              </a>
-            </p>
+          <footer className="border-t border-gold-leaf/10 bg-night-deep/40 backdrop-blur-sm mt-16">
+            <div className="text-center text-text-muted/80 text-xs py-8 px-4 space-y-3 max-w-3xl mx-auto">
+              <p className="leading-relaxed">{t("disclaimer")}</p>
+              <p className="text-text-muted/60">
+                <a href="/terms" className="text-gold-pale/80 hover:text-gold-pale transition-colors">
+                  {t("termsLink")}
+                </a>
+                <span className="mx-2 text-gold-leaf/30">✦</span>
+                <a href="/privacy" className="text-gold-pale/80 hover:text-gold-pale transition-colors">
+                  {t("privacyLink")}
+                </a>
+              </p>
+            </div>
           </footer>
         </NextIntlClientProvider>
       </body>

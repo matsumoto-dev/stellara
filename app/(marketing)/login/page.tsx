@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { StarOrnament, StellaraMark } from "@/components/icons/stellara-mark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -67,53 +68,70 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] px-4">
-      <h1 className="font-heading text-3xl font-bold mb-6">{t("title")}</h1>
-      <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
-        <Input id="email" name="email" type="email" label={t("email")} required />
-        <Input id="password" name="password" type="password" label={t("password")} required />
-        {error && (
-          <div className="text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg p-3">
-            {error}
-          </div>
-        )}
-        <Button type="submit" loading={loading} className="w-full" size="lg">
-          {t("submit")}
-        </Button>
-      </form>
+    <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 py-12">
+      <Link href="/" className="mb-8 group">
+        <StellaraMark
+          size={48}
+          className="text-gold-leaf drop-shadow-[0_0_16px_rgba(255,217,106,0.5)] group-hover:rotate-45 transition-transform duration-700"
+        />
+      </Link>
 
-      <div className="w-full max-w-sm mt-6">
-          <div className="relative flex items-center gap-3">
-            <hr className="flex-1 border-border" />
-            <span className="text-xs text-text-muted shrink-0">{t("demoSeparator")}</span>
-            <hr className="flex-1 border-border" />
-          </div>
-          <div className="mt-4 space-y-2">
-            <Button
-              type="button"
-              variant="secondary"
-              size="lg"
-              className="w-full"
-              loading={demoLoading}
-              onClick={handleDemoLogin}
-            >
-              {t("demoButton")}
-            </Button>
-            <p className="text-center text-xs text-text-muted">
-              {t("demoDisclaimer")}
-            </p>
-          </div>
+      <div className="divider-ornament max-w-[14rem] mb-6">
+        <StarOrnament size={6} />
       </div>
 
-      <div className="mt-4 space-y-2 text-center text-sm">
+      <h1 className="font-heading text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight">
+        {t("title")}
+      </h1>
+      <p className="text-text-muted text-sm mb-10">星があなたを待っています</p>
+
+      <div className="w-full max-w-sm bg-night-veil/40 backdrop-blur-sm border border-gold-leaf/15 rounded-xl p-8">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <Input id="email" name="email" type="email" label={t("email")} required />
+          <Input id="password" name="password" type="password" label={t("password")} required />
+          {error && (
+            <div className="text-red-300/90 text-sm bg-red-900/20 border border-red-400/20 rounded-lg p-3">
+              {error}
+            </div>
+          )}
+          <Button type="submit" loading={loading} className="w-full" size="lg">
+            {t("submit")}
+          </Button>
+        </form>
+
+        <div className="mt-7">
+          <div className="relative flex items-center gap-3 mb-5">
+            <hr className="flex-1 border-gold-leaf/15" />
+            <span className="text-[10px] text-text-muted uppercase tracking-[0.3em] shrink-0">
+              {t("demoSeparator")}
+            </span>
+            <hr className="flex-1 border-gold-leaf/15" />
+          </div>
+          <Button
+            type="button"
+            variant="secondary"
+            size="lg"
+            className="w-full"
+            loading={demoLoading}
+            onClick={handleDemoLogin}
+          >
+            {t("demoButton")}
+          </Button>
+          <p className="text-center text-[11px] text-text-muted/70 mt-3">
+            {t("demoDisclaimer")}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-6 space-y-2 text-center text-sm">
         <p>
-          <Link href="/reset-password" className="text-accent hover:underline">
+          <Link href="/reset-password" className="text-gold-pale/80 hover:text-gold-pale transition-colors">
             {t("forgotPassword")}
           </Link>
         </p>
         <p className="text-text-muted">
           {t("noAccount")}{" "}
-          <Link href="/signup" className="text-accent hover:underline">
+          <Link href="/signup" className="text-gold-pale hover:text-gold-glow transition-colors">
             {t("signUpLink")}
           </Link>
         </p>

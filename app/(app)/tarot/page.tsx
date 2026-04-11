@@ -73,11 +73,17 @@ export default function TarotPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      <div>
-        <h1 className="font-heading text-3xl font-bold text-text mb-1">{t("title")}</h1>
-        <p className="text-text-muted">{t("subtitle")}</p>
-      </div>
+    <div className="max-w-2xl mx-auto space-y-10">
+      <header>
+        <div className="flex items-center gap-2 text-gold-leaf/70 text-xs tracking-[0.3em] uppercase mb-2">
+          <span>♠</span>
+          <span>Tarot</span>
+        </div>
+        <h1 className="font-heading text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight">
+          {t("title")}
+        </h1>
+        <p className="text-text-muted text-sm leading-relaxed">{t("subtitle")}</p>
+      </header>
 
       {!drawnCards && (
         <>
@@ -92,7 +98,7 @@ export default function TarotPage() {
       )}
 
       {drawnCards && (
-        <div className="flex justify-center gap-4 flex-wrap">
+        <div className="flex justify-center gap-6 flex-wrap py-6">
           {drawnCards.map((card, i) => (
             <TarotCard key={card.card.name} drawn={card} revealed={revealed} index={i} />
           ))}
@@ -102,7 +108,7 @@ export default function TarotPage() {
       {loading && drawnCards && <Loading text={t("loading")} size="lg" />}
 
       {error && (
-        <div className="text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg p-4">
+        <div className="text-red-300/90 text-sm bg-red-900/20 border border-red-400/20 rounded-lg p-4">
           {error}
         </div>
       )}
@@ -110,13 +116,15 @@ export default function TarotPage() {
       {result && (
         <>
           <ReadingResult content={result.content} type="tarot" rejected={result.rejected} />
-          <button
-            type="button"
-            onClick={handleReset}
-            className="text-accent text-sm hover:underline"
-          >
-            {t("drawAgain")}
-          </button>
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="text-gold-pale text-sm tracking-wide hover:text-gold-glow transition-colors"
+            >
+              ✦ {t("drawAgain")} ✦
+            </button>
+          </div>
         </>
       )}
     </div>
