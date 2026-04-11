@@ -40,37 +40,42 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "生年月日が正しくありません" }, { status: 400 });
     }
 
-    const supabase = await createClient();
+    // ── Create the user via the admin API ─────────────────────────
+    //
+    // We bypass the regular `supabase.auth.signUp()` flow for two reasons:
+    //
+    // 1. When "Confirm email" is enabled in Supabase, signUp() returns a *fake*
+    //    user object (email enumeration protection) without actually creating a
+    //    row in auth.users. This causes the subsequent profile upsert to fail
+    //    with a foreign key violation (profiles.id → auth.users.id).
+    //
+    // 2. For a portfolio app we don't want the email confirmation friction:
+    //    evaluators should be able to sign up and immediately use the product
+    //    without checking their inbox.
+    //
+    // `admin.auth.admin.createUser()` always creates a real auth.users row and
+    // `email_confirm: true` marks it as confirmed so the user can sign in
+    // immediately afterwards.
+    const admin = createAdminClient();
 
-    // Build emailRedirectTo from the current request origin so the confirmation
-    // email link goes to the deployed domain (not Supabase's default Site URL).
-    const origin = new URL(request.url).origin;
-    const emailRedirectTo = `${origin}/api/auth/callback?next=/dashboard`;
-
-    const { data: authData, error: authError } = await supabase.auth.signUp({
+    const { data: createData, error: createError } = await admin.auth.admin.createUser({
       email,
       password,
-      options: { emailRedirectTo },
+      email_confirm: true,
+      user_metadata: display_name ? { display_name } : undefined,
     });
 
-    if (authError || !authData.user) {
-      console.error("[auth/signup] auth.signUp failed:", authError);
+    if (createError || !createData.user) {
+      console.error("[auth/signup] admin.createUser failed:", createError);
       return NextResponse.json(
-        { success: false, error: translateAuthError(authError) },
+        { success: false, error: translateAuthError(createError) },
         { status: 400 },
       );
     }
 
-    const userId = authData.user.id;
+    const userId = createData.user.id;
 
-    // Use admin client for profile + consent inserts because the user's session
-    // may not be established yet immediately after signUp (especially with email
-    // confirmation enabled). Without an active session, RLS policies that check
-    // auth.uid() = id would block the insert.
-    const admin = createAdminClient();
-
-    // UPSERT to handle the retry case (user re-attempts signup before email
-    // confirmation, in which case the profile row may already exist).
+    // ── Insert profile via admin client (bypasses RLS) ────────────
     const { error: profileError } = await admin
       .from("profiles")
       .upsert(
@@ -87,12 +92,14 @@ export async function POST(request: NextRequest) {
 
     if (profileError) {
       console.error("[auth/signup] profile upsert failed:", profileError);
+      // Roll back the user we just created so the email isn't stuck
+      await admin.auth.admin.deleteUser(userId).catch((e) => {
+        console.error("[auth/signup] rollback deleteUser failed:", e);
+      });
       return NextResponse.json(
         {
           success: false,
           error: "プロフィールの作成に失敗しました",
-          // Surface the underlying error for portfolio/demo debugging.
-          // Safe because this is a portfolio app and the message is descriptive only.
           debug: {
             code: profileError.code,
             message: profileError.message,
@@ -104,7 +111,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Record consent (also via admin client)
+    // ── Record consent ────────────────────────────────────────────
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
     const countryCode = request.headers.get("x-vercel-ip-country") ?? undefined;
 
@@ -122,13 +129,26 @@ export async function POST(request: NextRequest) {
       country_code: countryCode,
     });
 
-    // If email confirmation is enabled, signUp returns user but no session.
-    // Tell the client whether the user needs to verify their email.
-    const needsEmailConfirmation = !authData.session;
+    // ── Sign the user in to establish a session cookie ────────────
+    // This uses the SSR-aware client so the session is set on the response.
+    const supabase = await createClient();
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (signInError) {
+      console.error("[auth/signup] auto sign-in failed:", signInError);
+      // The user was created successfully — they can log in manually.
+      return NextResponse.json({
+        success: true,
+        data: { userId, sunSign, needsLogin: true, email },
+      });
+    }
 
     return NextResponse.json({
       success: true,
-      data: { userId, sunSign, needsEmailConfirmation, email },
+      data: { userId, sunSign, needsLogin: false, email },
     });
   } catch (error) {
     console.error("[auth/signup] unhandled error:", error);
