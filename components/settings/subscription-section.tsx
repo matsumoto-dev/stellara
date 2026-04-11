@@ -156,9 +156,14 @@ export function SubscriptionSection({
             </Button>
           </div>
         ) : (
-          <div className="space-y-4">
-            <p className="text-sm text-text-muted">{t("upgradeDescription")}</p>
-            <p className="text-sm text-text-muted">{t("demoMode")}</p>
+          <div className="rounded-lg border border-accent/20 bg-accent/5 p-5 space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-accent text-lg" aria-hidden="true">✦</span>
+              <p className="font-heading text-base font-semibold text-text">
+                {t("demoModeTitle")}
+              </p>
+            </div>
+            <p className="text-sm text-text-muted leading-relaxed">{t("demoMode")}</p>
             <Button disabled>{t("demoModeButton")}</Button>
           </div>
         )}

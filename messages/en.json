@@ -246,9 +246,11 @@
         "waiverAcknowledged": "I understand that by requesting immediate delivery, I lose my right to withdraw from this contract within 14 days (right of withdrawal under EU Consumer Rights Directive Art. 16(m)).",
         "required": "Both consents are required to proceed with purchase."
       },
-      "demoMode": "Billing is not available in demo mode.",
-      "demoModeButton": "Coming Soon"
+      "demoModeTitle": "Portfolio Notice",
+      "demoMode": "This is a portfolio site. The Pro plan checkout flow is fully implemented but disabled in production. No actual billing occurs.",
+      "demoModeButton": "Billing Disabled (Demo)"
     },
+    "logoutDescription": "Sign out of your current session.",
     "dangerZone": "Danger Zone",
     "deleteDescription": "Permanently delete your account and all associated data. This action has a 30-day grace period.",
     "deleteButton": "Delete Account",

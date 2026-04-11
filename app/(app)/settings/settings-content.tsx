@@ -30,9 +30,26 @@ export function SettingsContent({
 }: SettingsContentProps) {
   const router = useRouter();
   const t = useTranslations("settings");
+  const tAuth = useTranslations("auth");
   const tCommon = useTranslations("common");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  async function handleLogout() {
+    setLoggingOut(true);
+    try {
+      const res = await fetch("/api/auth/logout", { method: "POST" });
+      const json = await res.json().catch(() => ({ success: false }));
+      if (!json.success) {
+        setLoggingOut(false);
+        return;
+      }
+      window.location.href = "/login";
+    } catch {
+      setLoggingOut(false);
+    }
+  }
 
   async function handleDeleteAccount() {
     setDeleteError(null);
@@ -65,6 +82,16 @@ export function SettingsContent({
         isEU={isEU}
         countryCode={countryCode}
       />
+
+      <Card>
+        <CardHeader>
+          <CardTitle>{tAuth("logout")}</CardTitle>
+        </CardHeader>
+        <p className="text-sm text-text-muted mb-4">{t("logoutDescription")}</p>
+        <Button variant="secondary" onClick={handleLogout} loading={loggingOut}>
+          {tAuth("logout")}
+        </Button>
+      </Card>
 
       <Card>
         <CardHeader>

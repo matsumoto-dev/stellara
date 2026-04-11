@@ -23,7 +23,11 @@ export default async function SettingsPage() {
   const subscriptionStatus = (profile?.subscription_status as SubscriptionStatus) ?? "none";
   const periodEnd = (profile?.subscription_period_end as string) ?? null;
   const monthlyPriceId = process.env.STRIPE_PRICE_PRO_MONTHLY ?? "";
-  const stripeConfigured = monthlyPriceId.startsWith("price_");
+  // Billing is disabled by default (portfolio mode). To enable real Stripe checkout,
+  // set BILLING_ENABLED=true in Vercel environment variables. Server-only flag,
+  // read at request time in this Server Component.
+  const billingEnabled = process.env.BILLING_ENABLED === "true";
+  const stripeConfigured = billingEnabled && monthlyPriceId.startsWith("price_");
 
   // Detect EU/EEA visitors via Vercel's geo header (x-vercel-ip-country)
   const headersList = await headers();

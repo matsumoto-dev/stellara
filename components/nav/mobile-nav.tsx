@@ -15,7 +15,7 @@ const NAV_ITEMS: readonly NavItem[] = [
   { href: "/reading", labelKey: "reading", icon: "\u2728" },
   { href: "/tarot", labelKey: "tarot", icon: "\u2660" },
   { href: "/chat", labelKey: "chat", icon: "\u2601" },
-  { href: "/history", labelKey: "history", icon: "\u2736" },
+  { href: "/settings", labelKey: "settings", icon: "\u2699" },
 ];
 
 export function MobileNav() {
