@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { RateLimitCard } from "@/components/reading/rate-limit-card";
 import { ReadingForm } from "@/components/reading/reading-form";
 import { ReadingResult } from "@/components/reading/reading-result";
 import { CardSelector } from "@/components/tarot/card-selector";
@@ -23,11 +24,13 @@ export default function TarotPage() {
   const [result, setResult] = useState<TarotData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [rateLimitedAt, setRateLimitedAt] = useState<string | null | undefined>(undefined);
   const [revealed, setRevealed] = useState(false);
 
   async function handleDraw(question: string) {
     setLoading(true);
     setError(null);
+    setRateLimitedAt(undefined);
     setResult(null);
     setRevealed(false);
 
@@ -54,6 +57,10 @@ export default function TarotPage() {
       });
       const json = await res.json();
       if (!json.success) {
+        if (res.status === 429) {
+          setRateLimitedAt(json.resetAt ?? null);
+          return;
+        }
         setError(json.error ?? t("error"));
         return;
       }
@@ -70,6 +77,7 @@ export default function TarotPage() {
     setResult(null);
     setRevealed(false);
     setError(null);
+    setRateLimitedAt(undefined);
   }
 
   return (
@@ -86,7 +94,7 @@ export default function TarotPage() {
       </header>
 
       {!drawnCards && (
-        <>
+        <div className="bg-night-veil/40 backdrop-blur-sm border border-gold-leaf/15 rounded-xl p-7 space-y-5">
           <CardSelector selected={spread} onSelect={setSpread} disabled={loading} />
           <ReadingForm
             onSubmit={handleDraw}
@@ -94,7 +102,7 @@ export default function TarotPage() {
             placeholder={t("placeholder")}
             buttonText={t("drawCards")}
           />
-        </>
+        </div>
       )}
 
       {drawnCards && (
@@ -111,6 +119,21 @@ export default function TarotPage() {
         <div className="text-red-300/90 text-sm bg-red-900/20 border border-red-400/20 rounded-lg p-4">
           {error}
         </div>
+      )}
+
+      {rateLimitedAt !== undefined && (
+        <>
+          <RateLimitCard resetAt={rateLimitedAt ?? undefined} />
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="text-gold-pale text-sm tracking-wide hover:text-gold-glow transition-colors"
+            >
+              ✦ {t("drawAgain")} ✦
+            </button>
+          </div>
+        </>
       )}
 
       {result && (

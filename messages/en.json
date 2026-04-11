@@ -88,6 +88,12 @@
     "hint": "Try a different sign's horoscope",
     "close": "Close"
   },
+  "rateLimit": {
+    "title": "Today's readings have ended",
+    "description": "You've used all of your free readings for today. Tomorrow's stars are waiting.\nFor deeper conversations with the cosmos, consider Stellara Pro.",
+    "resetAt": "Available again at: {time}",
+    "cta": "View Pro Plan"
+  },
   "reading": {
     "title": "Personal Reading",
     "subtitle": "Share your question and the stars will reveal their guidance.",
