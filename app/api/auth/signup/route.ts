@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSunSign } from "@/lib/astrology/chart";
+import { createAdminClient } from "@/lib/db/admin";
 import { createClient } from "@/lib/db/server";
 import type { SUN_SIGNS } from "@/lib/db/types";
 
@@ -54,8 +55,13 @@ export async function POST(request: NextRequest) {
 
     const userId = authData.user.id;
 
-    // Create profile
-    const { error: profileError } = await supabase.from("profiles").insert({
+    // Use admin client for profile + consent inserts because the user's session
+    // may not be established yet immediately after signUp (especially with email
+    // confirmation enabled). Without an active session, RLS policies that check
+    // auth.uid() = id would block the insert.
+    const admin = createAdminClient();
+
+    const { error: profileError } = await admin.from("profiles").insert({
       id: userId,
       email,
       display_name: display_name ?? null,
@@ -65,24 +71,25 @@ export async function POST(request: NextRequest) {
     });
 
     if (profileError) {
+      console.error("[auth/signup] profile insert failed:", profileError);
       return NextResponse.json(
         { success: false, error: "プロフィールの作成に失敗しました" },
         { status: 500 },
       );
     }
 
-    // Record consent
+    // Record consent (also via admin client)
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
     const countryCode = request.headers.get("x-vercel-ip-country") ?? undefined;
 
-    await supabase.from("consent_records").insert({
+    await admin.from("consent_records").insert({
       user_id: userId,
       consent_type: "terms_and_privacy",
       ip_address: ip,
       country_code: countryCode,
     });
 
-    await supabase.from("consent_records").insert({
+    await admin.from("consent_records").insert({
       user_id: userId,
       consent_type: "entertainment_disclaimer",
       ip_address: ip,
