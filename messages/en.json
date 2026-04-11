@@ -88,6 +88,15 @@
     "hint": "Try a different sign's horoscope",
     "close": "Close"
   },
+  "legal": {
+    "lastUpdated": "Last updated: {date}",
+    "contents": "Contents",
+    "backToHome": "Back to home",
+    "seeAlsoTerms": "See also: {link}",
+    "seeAlsoPrivacy": "See also: {link}",
+    "termsTitle": "Terms of Service",
+    "privacyTitle": "Privacy Policy"
+  },
   "rateLimit": {
     "title": "Today's readings have ended",
     "description": "You've used all of your free readings for today. Tomorrow's stars are waiting.\nFor deeper conversations with the cosmos, consider Stellara Pro.",

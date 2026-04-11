@@ -80,10 +80,13 @@ export default function LoginPage() {
         <StarOrnament size={6} />
       </div>
 
-      <h1 className="font-heading text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight">
+      <h1
+        className="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight text-center"
+        style={{ wordBreak: "keep-all" }}
+      >
         {t("title")}
       </h1>
-      <p className="text-text-muted text-sm mb-10">星があなたを待っています</p>
+      <p className="text-text-muted text-sm mb-10 text-center">星があなたを待っています</p>
 
       <div className="w-full max-w-sm bg-night-veil/40 backdrop-blur-sm border border-gold-leaf/15 rounded-xl p-8">
         <form onSubmit={handleSubmit} className="space-y-5">

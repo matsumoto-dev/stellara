@@ -155,6 +155,44 @@ test.describe("Stellara Production Walkthrough", () => {
     await page.screenshot({ path: `${SCREENSHOT_DIR}/10-mobile-dashboard.png`, fullPage: true });
     await context.close();
   });
+
+  test("11 - 利用規約ページ", async ({ page }) => {
+    await page.goto(`${PROD_URL}/terms`);
+    await page.waitForLoadState("networkidle");
+    await page.screenshot({ path: `${SCREENSHOT_DIR}/11-terms.png`, fullPage: true });
+  });
+
+  test("12 - プライバシーポリシーページ", async ({ page }) => {
+    await page.goto(`${PROD_URL}/privacy`);
+    await page.waitForLoadState("networkidle");
+    await page.screenshot({ path: `${SCREENSHOT_DIR}/12-privacy.png`, fullPage: true });
+  });
+
+  test("13 - モバイル ログインページ", async ({ browser }) => {
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      userAgent:
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15",
+    });
+    const page = await context.newPage();
+    await page.goto(`${PROD_URL}/login`);
+    await page.waitForLoadState("networkidle");
+    await page.screenshot({ path: `${SCREENSHOT_DIR}/13-mobile-login.png`, fullPage: true });
+    await context.close();
+  });
+
+  test("14 - モバイル ランディングページ", async ({ browser }) => {
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      userAgent:
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15",
+    });
+    const page = await context.newPage();
+    await page.goto(PROD_URL);
+    await page.waitForLoadState("networkidle");
+    await page.screenshot({ path: `${SCREENSHOT_DIR}/14-mobile-landing.png`, fullPage: true });
+    await context.close();
+  });
 });
 
 async function loginAsDemoUser(page: import("@playwright/test").Page) {

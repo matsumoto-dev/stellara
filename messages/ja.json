@@ -88,6 +88,15 @@
     "hint": "他の星座のホロスコープも見てみる",
     "close": "閉じる"
   },
+  "legal": {
+    "lastUpdated": "最終更新日: {date}",
+    "contents": "目次",
+    "backToHome": "ホームに戻る",
+    "seeAlsoTerms": "あわせて確認: {link}",
+    "seeAlsoPrivacy": "あわせて確認: {link}",
+    "termsTitle": "利用規約",
+    "privacyTitle": "プライバシーポリシー"
+  },
   "rateLimit": {
     "title": "今日の鑑定はここまで",
     "description": "本日分の無料鑑定はすべてご利用いただきました。明日の星々があなたを待っています。\nもっと深く星と対話したい方には、Proプランがおすすめです。",

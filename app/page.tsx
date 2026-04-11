@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { StarOrnament, StellaraMark } from "@/components/icons/stellara-mark";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { getFAQPageJsonLd, getSoftwareApplicationJsonLd } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = {
@@ -67,16 +68,19 @@ export default async function LandingPage() {
       </header>
 
       {/* ── Hero ────────────────────────────────────────────── */}
-      <section className="flex flex-col items-center justify-center text-center px-6 pt-20 pb-32 max-w-3xl mx-auto">
-        <div className="flex items-center gap-3 text-gold-leaf/80 text-xs font-medium tracking-[0.4em] uppercase mb-8">
+      <section className="flex flex-col items-center justify-center text-center px-6 pt-16 md:pt-20 pb-24 md:pb-32 max-w-3xl mx-auto">
+        <div className="flex items-center gap-3 text-gold-leaf/80 text-[10px] md:text-xs font-medium tracking-[0.4em] uppercase mb-6 md:mb-8">
           <StarOrnament size={10} />
           <span>AI Astrology</span>
           <StarOrnament size={10} />
         </div>
-        <h1 className="font-heading text-5xl md:text-7xl font-semibold text-moonlight mb-8 leading-[1.1] tracking-tight">
+        <h1
+          className="font-heading text-[2.5rem] sm:text-5xl md:text-7xl font-semibold text-moonlight mb-6 md:mb-8 leading-[1.15] tracking-tight"
+          style={{ wordBreak: "keep-all", overflowWrap: "break-word" }}
+        >
           <span className="text-gold-gradient">{t("hero.headline")}</span>
         </h1>
-        <p className="text-text-muted text-base md:text-lg max-w-xl mb-12 leading-[1.85] font-reading">
+        <p className="text-text-muted text-sm md:text-lg max-w-xl mb-10 md:mb-12 leading-[1.85] font-reading px-2">
           {t("hero.subheadline")}
         </p>
         <div className="flex flex-col sm:flex-row gap-5 items-center">
@@ -245,6 +249,8 @@ export default async function LandingPage() {
           {t("finalCta.cta")}
         </Link>
       </section>
+
+      <SiteFooter />
     </div>
   );
 }

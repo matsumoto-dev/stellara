@@ -135,12 +135,15 @@ export default function DashboardPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-10">
       <header className="flex items-start justify-between gap-4 flex-wrap">
-        <div>
+        <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-gold-leaf/70 text-xs tracking-[0.3em] uppercase mb-2">
             {isNight ? <MoonIcon size={14} /> : TimeIcon && <TimeIcon size={14} />}
             <span>Stellara</span>
           </div>
-          <h1 className="font-heading text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight">
+          <h1
+            className="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight"
+            style={{ wordBreak: "keep-all" }}
+          >
             {t(`greeting.${greeting}`)}
           </h1>
           <p className="text-text-muted text-sm leading-relaxed max-w-md">{t("subtitle")}</p>

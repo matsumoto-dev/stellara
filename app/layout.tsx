@@ -7,7 +7,7 @@ import {
   Shippori_Mincho,
 } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages, getTranslations } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 import { getOrganizationJsonLd, getWebSiteJsonLd } from "@/lib/seo/json-ld";
 import "./globals.css";
 
@@ -96,7 +96,6 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
-  const t = await getTranslations("common");
 
   return (
     <html
@@ -117,21 +116,7 @@ export default async function RootLayout({
       </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <main>{children}</main>
-          <footer className="border-t border-gold-leaf/10 bg-night-deep/40 backdrop-blur-sm mt-16">
-            <div className="text-center text-text-muted/80 text-xs py-8 px-4 space-y-3 max-w-3xl mx-auto">
-              <p className="leading-relaxed">{t("disclaimer")}</p>
-              <p className="text-text-muted/60">
-                <a href="/terms" className="text-gold-pale/80 hover:text-gold-pale transition-colors">
-                  {t("termsLink")}
-                </a>
-                <span className="mx-2 text-gold-leaf/30">✦</span>
-                <a href="/privacy" className="text-gold-pale/80 hover:text-gold-pale transition-colors">
-                  {t("privacyLink")}
-                </a>
-              </p>
-            </div>
-          </footer>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

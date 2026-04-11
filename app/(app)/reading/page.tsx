@@ -60,7 +60,10 @@ export default function ReadingPage() {
           <span>✦</span>
           <span>Personal Reading</span>
         </div>
-        <h1 className="font-heading text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight">
+        <h1
+          className="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-moonlight mb-2 tracking-tight"
+          style={{ wordBreak: "keep-all" }}
+        >
           {t("title")}
         </h1>
         <p className="text-text-muted text-sm leading-relaxed">{t("subtitle")}</p>
