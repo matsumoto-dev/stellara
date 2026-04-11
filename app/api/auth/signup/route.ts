@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSunSign } from "@/lib/astrology/chart";
+import { translateAuthError } from "@/lib/auth/error-messages";
 import { createAdminClient } from "@/lib/db/admin";
 import { createClient } from "@/lib/db/server";
 import type { SUN_SIGNS } from "@/lib/db/types";
@@ -47,8 +48,9 @@ export async function POST(request: NextRequest) {
     });
 
     if (authError || !authData.user) {
+      console.error("[auth/signup] auth.signUp failed:", authError);
       return NextResponse.json(
-        { success: false, error: authError?.message ?? "Signup failed" },
+        { success: false, error: translateAuthError(authError) },
         { status: 400 },
       );
     }

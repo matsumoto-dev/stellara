@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { translateAuthError } from "@/lib/auth/error-messages";
 import { createClient } from "@/lib/db/server";
 
 const loginSchema = z.object({
@@ -25,10 +26,16 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      return NextResponse.json(
-        { success: false, error: "メールアドレスまたはパスワードが正しくありません" },
-        { status: 401 },
-      );
+      // For credential errors, return a generic message to avoid user enumeration.
+      // For other errors (rate limit, captcha, etc.), use the translator.
+      const isCredentialError =
+        error.code === "invalid_credentials" ||
+        /invalid login credentials/i.test(error.message ?? "");
+      const message = isCredentialError
+        ? "メールアドレスまたはパスワードが正しくありません"
+        : translateAuthError(error);
+      console.error("[auth/login] sign-in failed:", error);
+      return NextResponse.json({ success: false, error: message }, { status: 401 });
     }
 
     return NextResponse.json({
