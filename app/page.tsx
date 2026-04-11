@@ -127,9 +127,9 @@ export default async function LandingPage() {
       <section className="px-6 py-20 max-w-4xl mx-auto w-full">
         <h2 className="text-3xl font-bold text-center text-text mb-2">{t("pricing.title")}</h2>
         <p className="text-center text-text-muted mb-12">{t("pricing.subtitle")}</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {/* Free Plan */}
-          <div className="bg-bg-card border border-text-muted/10 rounded-xl p-8">
+          <div className="bg-bg-card border border-text-muted/10 rounded-xl p-8 flex flex-col">
             <div className="text-text-muted text-sm font-medium mb-1">{t("pricing.free.name")}</div>
             <div className="flex items-baseline gap-1 mb-1">
               <span className="text-4xl font-bold text-text">{t("pricing.free.price")}</span>
@@ -145,14 +145,14 @@ export default async function LandingPage() {
             </ul>
             <Link
               href="/signup"
-              className="block text-center border border-text-muted/30 text-text py-3 rounded-lg text-sm hover:border-accent/50 transition-colors"
+              className="mt-auto block text-center border border-text-muted/30 text-text py-3 rounded-lg text-sm hover:border-accent/50 transition-colors"
             >
               {t("pricing.free.cta")}
             </Link>
           </div>
 
           {/* Pro Plan */}
-          <div className="bg-primary border border-accent/30 rounded-xl p-8 relative">
+          <div className="bg-primary border border-accent/30 rounded-xl p-8 relative flex flex-col">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2">
               <span className="bg-accent text-bg text-xs font-bold px-3 py-1 rounded-full">
                 {t("pricing.pro.badge")}
@@ -173,7 +173,7 @@ export default async function LandingPage() {
             </ul>
             <Link
               href="/signup"
-              className="block text-center bg-accent text-bg font-semibold py-3 rounded-lg text-sm hover:bg-accent-light transition-colors"
+              className="mt-auto block text-center bg-accent text-bg font-semibold py-3 rounded-lg text-sm hover:bg-accent-light transition-colors"
             >
               {t("pricing.pro.cta")}
             </Link>
