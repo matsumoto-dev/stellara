@@ -41,26 +41,26 @@ export default async function LandingPage() {
       />
 
       {/* ── Nav ─────────────────────────────────────────────── */}
-      <header className="flex items-center justify-between px-6 py-5 max-w-6xl mx-auto w-full">
-        <Link href="/" className="flex items-center gap-2.5 group">
+      <header className="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 sm:py-5 max-w-6xl mx-auto w-full">
+        <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group min-w-0">
           <StellaraMark
-            size={28}
-            className="text-gold-leaf drop-shadow-[0_0_10px_rgba(255,217,106,0.4)] group-hover:rotate-45 transition-transform duration-700"
+            size={26}
+            className="shrink-0 text-gold-leaf drop-shadow-[0_0_10px_rgba(255,217,106,0.4)] group-hover:rotate-45 transition-transform duration-700"
           />
-          <span className="font-heading text-2xl font-semibold text-gold-pale tracking-wide">
+          <span className="font-heading text-xl sm:text-2xl font-semibold text-gold-pale tracking-wide truncate">
             Stellara
           </span>
         </Link>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-3 sm:gap-6 shrink-0">
           <Link
             href="/login"
-            className="text-sm text-text-muted hover:text-gold-pale transition-colors tracking-wide"
+            className="text-xs sm:text-sm text-text-muted hover:text-gold-pale transition-colors tracking-wide whitespace-nowrap"
           >
             {t("hero.login")}
           </Link>
           <Link
             href="/signup"
-            className="relative text-sm text-night-void font-semibold tracking-wide px-5 py-2 rounded-lg bg-gradient-to-b from-gold-glow via-gold-leaf to-gold-deep shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_4px_16px_-2px_rgba(201,169,97,0.35),0_0_0_1px_rgba(201,169,97,0.6)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_6px_24px_-2px_rgba(255,217,106,0.55),0_0_0_1px_rgba(255,217,106,0.8)] transition-all"
+            className="relative text-xs sm:text-sm text-night-void font-semibold tracking-wide px-3 sm:px-5 py-2 rounded-lg bg-gradient-to-b from-gold-glow via-gold-leaf to-gold-deep shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_4px_16px_-2px_rgba(201,169,97,0.35),0_0_0_1px_rgba(201,169,97,0.6)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_6px_24px_-2px_rgba(255,217,106,0.55),0_0_0_1px_rgba(255,217,106,0.8)] transition-all whitespace-nowrap"
           >
             {t("hero.cta")}
           </Link>
@@ -68,15 +68,15 @@ export default async function LandingPage() {
       </header>
 
       {/* ── Hero ────────────────────────────────────────────── */}
-      <section className="flex flex-col items-center justify-center text-center px-6 pt-16 md:pt-20 pb-24 md:pb-32 max-w-3xl mx-auto">
-        <div className="flex items-center gap-3 text-gold-leaf/80 text-[10px] md:text-xs font-medium tracking-[0.4em] uppercase mb-6 md:mb-8">
+      <section className="flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-12 sm:pt-16 md:pt-20 pb-20 sm:pb-24 md:pb-32 max-w-3xl mx-auto w-full">
+        <div className="flex items-center gap-3 text-gold-leaf/80 text-[10px] md:text-xs font-medium tracking-[0.4em] uppercase mb-5 sm:mb-6 md:mb-8">
           <StarOrnament size={10} />
           <span>AI Astrology</span>
           <StarOrnament size={10} />
         </div>
         <h1
-          className="font-heading text-[2.5rem] sm:text-5xl md:text-7xl font-semibold text-moonlight mb-6 md:mb-8 leading-[1.15] tracking-tight"
-          style={{ wordBreak: "keep-all", overflowWrap: "break-word" }}
+          className="font-heading text-[1.85rem] xs:text-[2.1rem] sm:text-5xl md:text-7xl font-semibold text-moonlight mb-5 sm:mb-6 md:mb-8 leading-[1.2] tracking-tight"
+          style={{ wordBreak: "keep-all", overflowWrap: "break-word", maxWidth: "100%" }}
         >
           <span className="text-gold-gradient">{t("hero.headline")}</span>
         </h1>

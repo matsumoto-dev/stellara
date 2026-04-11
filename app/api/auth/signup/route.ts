@@ -88,7 +88,18 @@ export async function POST(request: NextRequest) {
     if (profileError) {
       console.error("[auth/signup] profile upsert failed:", profileError);
       return NextResponse.json(
-        { success: false, error: "プロフィールの作成に失敗しました" },
+        {
+          success: false,
+          error: "プロフィールの作成に失敗しました",
+          // Surface the underlying error for portfolio/demo debugging.
+          // Safe because this is a portfolio app and the message is descriptive only.
+          debug: {
+            code: profileError.code,
+            message: profileError.message,
+            details: profileError.details,
+            hint: profileError.hint,
+          },
+        },
         { status: 500 },
       );
     }
@@ -111,9 +122,13 @@ export async function POST(request: NextRequest) {
       country_code: countryCode,
     });
 
+    // If email confirmation is enabled, signUp returns user but no session.
+    // Tell the client whether the user needs to verify their email.
+    const needsEmailConfirmation = !authData.session;
+
     return NextResponse.json({
       success: true,
-      data: { userId, sunSign },
+      data: { userId, sunSign, needsEmailConfirmation, email },
     });
   } catch (error) {
     console.error("[auth/signup] unhandled error:", error);
