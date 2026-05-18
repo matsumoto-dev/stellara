@@ -1,0 +1,329 @@
+{
+  "common": {
+    "title": "Stellara",
+    "tagline": "あなた専属のAI占星術師",
+    "disclaimer": "本サービスは娯楽を目的としたものです。Stellaraは専門家によるアドバイスの代わりにはなりません。",
+    "termsLink": "利用規約",
+    "privacyLink": "プライバシーポリシー",
+    "error": {
+      "serverConnection": "サーバーに接続できませんでした"
+    }
+  },
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "personal": "パーソナル",
+    "reading": "鑑定",
+    "tarot": "タロット",
+    "chat": "チャット",
+    "settings": "設定",
+    "home": "ホーム",
+    "history": "履歴"
+  },
+  "auth": {
+    "login": {
+      "title": "おかえりなさい",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "submit": "ログイン",
+      "forgotPassword": "パスワードをお忘れですか？",
+      "noAccount": "はじめてご利用ですか？",
+      "signUpLink": "新規登録はこちら",
+      "error": "ログインに失敗しました",
+      "demoSeparator": "または",
+      "demoButton": "デモアカウントで体験する",
+      "demoDisclaimer": "※ デモアカウントのデータは保存されません"
+    },
+    "signup": {
+      "title": "アカウントを作成",
+      "email": "メールアドレス",
+      "password": "パスワード（8文字以上）",
+      "birthDate": "生年月日",
+      "displayName": "表示名（任意）",
+      "termsConsent": "{termsLink}および{privacyLink}に同意します",
+      "entertainmentConsent": "Stellaraは娯楽目的のサービスであり、専門的なアドバイスではないことを理解しています",
+      "submit": "アカウントを作成",
+      "hasAccount": "すでにアカウントをお持ちですか？",
+      "loginLink": "ログイン",
+      "error": "登録に失敗しました"
+    },
+    "resetPassword": {
+      "title": "パスワードの再設定",
+      "description": "ご登録のメールアドレスを入力してください。再設定用のリンクをお送りします。",
+      "email": "メールアドレス",
+      "submit": "再設定リンクを送信",
+      "backToLogin": "ログインに戻る"
+    },
+    "logout": "ログアウト"
+  },
+  "dashboard": {
+    "greeting": {
+      "morning": "おはようございます、",
+      "afternoon": "こんにちは、",
+      "evening": "こんばんは、"
+    },
+    "subtitle": "今日、星があなたに届けるメッセージです。",
+    "explore": "メニュー",
+    "actions": {
+      "personalReading": {
+        "title": "パーソナル鑑定",
+        "description": "あなたの星座に合わせた特別な鑑定"
+      },
+      "tarot": {
+        "title": "タロット",
+        "description": "カードが示す、あなたへのメッセージ"
+      },
+      "chat": {
+        "title": "チャット",
+        "description": "星に何でも気軽に相談"
+      }
+    }
+  },
+  "horoscope": {
+    "loading": "星に問いかけています...",
+    "todaysHoroscope": "今日のホロスコープ",
+    "loadError": "ホロスコープを読み込めませんでした"
+  },
+  "signSwitcher": {
+    "switchSign": "星座を切り替える",
+    "hint": "他の星座のホロスコープも見てみる",
+    "close": "閉じる"
+  },
+  "legal": {
+    "lastUpdated": "最終更新日: {date}",
+    "contents": "目次",
+    "backToHome": "ホームに戻る",
+    "seeAlsoTerms": "あわせて確認: {link}",
+    "seeAlsoPrivacy": "あわせて確認: {link}",
+    "termsTitle": "利用規約",
+    "privacyTitle": "プライバシーポリシー"
+  },
+  "rateLimit": {
+    "title": "今日の鑑定はここまで",
+    "description": "本日分の無料鑑定はすべてご利用いただきました。明日の星々があなたを待っています。\nもっと深く星と対話したい方には、Proプランがおすすめです。",
+    "resetAt": "次回利用可能: {time}",
+    "cta": "Proプランを見る"
+  },
+  "reading": {
+    "title": "パーソナル鑑定",
+    "subtitle": "気になることを星に問いかけてみてください。",
+    "placeholder": "聞いてみたいことを入力（任意）",
+    "submit": "鑑定する",
+    "revealReading": "鑑定結果を見る",
+    "loading": "星が語りかけています...",
+    "anotherReading": "もう一度鑑定する",
+    "readingBadge": "{type}鑑定",
+    "contentFiltered": "内容を表示できませんでした",
+    "guidanceNote": "星の導きは可能性を示すものです。未来を決めつけるものではありません。ご自身の直感も大切にしてください。",
+    "error": "鑑定に失敗しました"
+  },
+  "tarot": {
+    "title": "タロット鑑定",
+    "subtitle": "スプレッドを選んで、カードを引いてみましょう。",
+    "singleCard": "1枚引き",
+    "pastPresentFuture": "過去・現在・未来",
+    "placeholder": "気になることがあれば入力（任意）",
+    "drawCards": "カードを引く",
+    "loading": "カードを読み解いています...",
+    "drawAgain": "もう一度引く",
+    "positions": {
+      "past": "過去",
+      "present": "現在",
+      "future": "未来",
+      "single": "あなたのカード"
+    },
+    "orientation": {
+      "upright": "正位置",
+      "reversed": "逆位置"
+    }
+  },
+  "chat": {
+    "title": "星とのチャット",
+    "subtitle": "気になることを自由に聞いてみましょう",
+    "emptyState": "星との対話を始めましょう。\n恋愛・仕事・人生のことなど、何でも聞いてみてください。",
+    "loading": "星が考えています...",
+    "inputPlaceholder": "気になることを聞いてみる...",
+    "send": "送信",
+    "turnCounter": "{current}/{limit}回のやり取りを使用",
+    "limitReached": "今回のやり取り上限に達しました。",
+    "upgradePrompt": "Proプランにすると、もっとたくさん対話できます。",
+    "error": "メッセージの送信に失敗しました"
+  },
+  "history": {
+    "title": "鑑定履歴",
+    "subtitle": "これまでの鑑定やタロットの記録です。",
+    "empty": "まだ鑑定の記録がありません。パーソナル鑑定やタロットを試してみましょう。",
+    "loadMore": "もっと見る",
+    "loading": "読み込んでいます...",
+    "error": "履歴の読み込みに失敗しました",
+    "upgradePrompt": "鑑定履歴の閲覧にはProプランが必要です。",
+    "upgrade": "Proプランにする",
+    "types": {
+      "personal": "パーソナル鑑定",
+      "tarot": "タロット",
+      "chat": "チャット",
+      "compatibility": "相性鑑定"
+    }
+  },
+  "landing": {
+    "hero": {
+      "headline": "あなた専属のAI占星術師",
+      "subheadline": "毎日のホロスコープ、タロット、パーソナル鑑定を、あなたの星座に合わせてお届けします。",
+      "cta": "無料ではじめる",
+      "login": "ログイン"
+    },
+    "features": {
+      "title": "星の力を、あなたの手に",
+      "items": {
+        "horoscope": {
+          "title": "毎日のホロスコープ",
+          "description": "あなたの星座と今日の星の配置から、パーソナルなメッセージをお届けします。"
+        },
+        "reading": {
+          "title": "パーソナル鑑定",
+          "description": "恋愛、仕事、人生について聞いてみてください。星が、あなたに必要なメッセージを届けます。"
+        },
+        "tarot": {
+          "title": "タロット",
+          "description": "1枚引きでヒントをもらうか、3枚スプレッドで深く読み解くか。カードに聞いてみましょう。"
+        },
+        "chat": {
+          "title": "星とのチャット",
+          "description": "AI占星術師と自由に対話。気になることを深掘りして、あなただけの答えを見つけましょう。"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "使い方",
+      "steps": {
+        "one": {
+          "title": "無料で登録",
+          "description": "生年月日を入力するだけ。星があなたを知るのに必要な情報はそれだけです。"
+        },
+        "two": {
+          "title": "鑑定を選ぶ",
+          "description": "ホロスコープ、パーソナル鑑定、タロット、チャットからお好みのメニューを選びましょう。"
+        },
+        "three": {
+          "title": "メッセージを受け取る",
+          "description": "数秒で、あなただけのメッセージが届きます。"
+        }
+      }
+    },
+    "pricing": {
+      "title": "わかりやすい料金プラン",
+      "subtitle": "まずは無料で体験。気に入ったらProへ。",
+      "free": {
+        "name": "Free",
+        "price": "$0",
+        "period": "ずっと無料",
+        "features": [
+          "毎日のホロスコープ",
+          "1日1回のパーソナル鑑定",
+          "1日1回のタロット"
+        ],
+        "cta": "無料ではじめる"
+      },
+      "pro": {
+        "name": "Pro",
+        "price": "$9.99",
+        "period": "月額",
+        "badge": "おすすめ",
+        "features": [
+          "パーソナル鑑定が無制限",
+          "タロットが無制限",
+          "チャット月20回",
+          "鑑定履歴の閲覧",
+          "優先メッセージ"
+        ],
+        "cta": "Proプランにする"
+      }
+    },
+    "socialProof": {
+      "disclaimer": "本サービスは娯楽を目的としたものです。専門家のアドバイスに代わるものではありません。"
+    },
+    "finalCta": {
+      "title": "星があなたを待っています",
+      "subtitle": "さあ、星との対話をはじめましょう。",
+      "cta": "無料ではじめる — カード登録不要"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "subtitle": "アカウントの設定を管理できます。",
+    "subscription": {
+      "title": "ご利用プラン",
+      "currentPlan": "現在のプラン",
+      "free": "Free（無料プラン）",
+      "pro": "Pro — $9.99/月",
+      "upgrade": "Proプランにする",
+      "upgradeDescription": "Proにすると、鑑定やタロットが無制限に。チャットや履歴閲覧もお使いいただけます。",
+      "manage": "プランを管理",
+      "nextBilling": "次回のお支払い: {date}",
+      "loading": "読み込み中...",
+      "euConsent": {
+        "title": "EU/EEAにお住まいの方へ",
+        "immediateDelivery": "デジタルコンテンツへの即時アクセスを希望し、14日間のクーリングオフ期間の終了前に提供されることに同意します。",
+        "waiverAcknowledged": "即時提供を希望することにより、14日以内の撤回権（EU消費者権利指令 第16条(m)）を放棄することを理解しています。",
+        "required": "ご購入には両方への同意が必要です。"
+      },
+      "demoModeTitle": "ポートフォリオ版のお知らせ",
+      "demoMode": "本サイトはポートフォリオです。Proプランの決済機能は実装済みですが、本番環境では無効化されています。実際の課金は発生しません。",
+      "demoModeButton": "決済機能はデモ無効中"
+    },
+    "logoutDescription": "現在のセッションからログアウトします。",
+    "dangerZone": "アカウントの削除",
+    "deleteDescription": "アカウントとすべてのデータを削除します。削除後30日間は復元できます。",
+    "deleteButton": "アカウントを削除",
+    "deleteDialog": {
+      "title": "本当に削除しますか？",
+      "description": "アカウントは30日後に完全に削除されます。その間にログインすれば削除を取り消せます。30日を過ぎるとデータは復元できません。",
+      "confirmLabel": "確認のため「DELETE」と入力してください",
+      "confirmPlaceholder": "DELETE",
+      "cancel": "キャンセル",
+      "confirm": "削除する"
+    }
+  },
+  "profileSetup": {
+    "title": "星座を教えてください",
+    "subtitle": "あなたに合ったホロスコープをお届けするために、星座を選んでください。",
+    "submit": "はじめる",
+    "saving": "設定しています...",
+    "error": "星座の保存に失敗しました"
+  },
+  "error": {
+    "title": "エラーが発生しました",
+    "defaultMessage": "予期しないエラーが発生しました。もう一度お試しください。",
+    "tryAgain": "もう一度試す"
+  },
+  "proGate": {
+    "title": "{feature}はProプラン限定です",
+    "description": "Proプランにアップグレードすると、この機能をはじめ、鑑定やタロットが無制限でお楽しみいただけます。",
+    "cta": "プランを見る",
+    "features": {
+      "chat": "星とのチャット",
+      "compatibility": "相性鑑定",
+      "history": "鑑定履歴"
+    }
+  },
+  "share": {
+    "pinterest": "Pinterest",
+    "x": "Xでシェア",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp",
+    "download": "画像を保存"
+  },
+  "zodiac": {
+    "aries": "おひつじ座",
+    "taurus": "おうし座",
+    "gemini": "ふたご座",
+    "cancer": "かに座",
+    "leo": "しし座",
+    "virgo": "おとめ座",
+    "libra": "てんびん座",
+    "scorpio": "さそり座",
+    "sagittarius": "いて座",
+    "capricorn": "やぎ座",
+    "aquarius": "みずがめ座",
+    "pisces": "うお座"
+  }
+}
