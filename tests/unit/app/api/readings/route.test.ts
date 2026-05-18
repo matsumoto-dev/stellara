@@ -59,8 +59,9 @@ vi.mock("@/lib/config", () => ({
 
 async function callGet(query = "") {
   const { GET } = await import("@/app/api/readings/route");
+  const { NextRequest } = await import("next/server");
   const url = `http://localhost/api/readings${query}`;
-  const request = new Request(url, { method: "GET" });
+  const request = new NextRequest(url, { method: "GET" });
   return GET(request);
 }
 

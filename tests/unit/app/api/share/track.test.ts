@@ -1,3 +1,4 @@
+import { NextRequest } from "next/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // ── Supabase mock ────────────────────────────────────────────────────────────
@@ -30,7 +31,7 @@ vi.mock("@/lib/config", () => ({
 
 async function callPost(body: unknown) {
   const { POST } = await import("@/app/api/share/track/route");
-  const request = new Request("http://localhost/api/share/track", {
+  const request = new NextRequest("http://localhost/api/share/track", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -117,7 +118,7 @@ describe("POST /api/share/track", () => {
 
   it("returns 400 for invalid JSON body", async () => {
     const { POST } = await import("@/app/api/share/track/route");
-    const request = new Request("http://localhost/api/share/track", {
+    const request = new NextRequest("http://localhost/api/share/track", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: "not-json",
